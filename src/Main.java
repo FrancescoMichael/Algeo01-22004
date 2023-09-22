@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner objScan = new Scanner(System.in);
-
+        
         boolean process = true;
         while (process) {
             System.out.println("MENU\r\n" + //
@@ -22,5 +22,6 @@ public class Main {
                 process = false;
             }
         }
+        objScan.close();
     }
 }
