@@ -32,7 +32,7 @@ public class Matriks {
             for (int j = 0; j < n; j++) {
                 System.out.print(this.mtrx[i][j] + " ");
             }
-            System.out.println("\n");
+            System.out.println();
         }
     }
 
@@ -198,6 +198,7 @@ public class Matriks {
             }
         }
     }
+
     public double getDeterminantOBE(int n, int o) {
         // cek yang kosongngan semua taruh ke bawah
         int pow = 0;
@@ -216,8 +217,9 @@ public class Matriks {
 
                 if (this.mtrx[i][col] != 0) {
                     // dibagi sek dengan dirinya sendiri biar satu
+                    multi /= this.mtrx[i][col];
                     divideRow(i, this.mtrx[i][col], o);
-                    multi/=this.mtrx[i][col];
+                    displayMatrix(3);
                     for (int j = i + 1; j < n; j++) {
                         // untuk ngenolkan yg bukan baris 1
                         if (this.mtrx[j][col] != 0) {
@@ -243,10 +245,9 @@ public class Matriks {
                             i--;
                         } else {
                             add2Row(i, idx, 1, o);
+                            multi /= this.mtrx[i][col];
                             divideRow(i, this.mtrx[i][col], o);
-                            multi/=this.mtrx[i][col];
-
-
+                            displayMatrix(3);
                             for (int j = i + 1; j < n; j++) {
                                 if (this.mtrx[j][col] != 0) {
                                     substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
@@ -258,7 +259,7 @@ public class Matriks {
                 col++;
             }
         }
-        return (double) ((Math.pow(-1, pow))/multi);
+        return (double) ((Math.pow(-1, pow)) / multi);
     }
 
     // public void getEselonMatTereduksi(int n) {
@@ -378,7 +379,6 @@ public class Matriks {
         }
     }
 
-    
     // return double matrix
     // input e 2 matrix
     public double[][] multiplyMatrix(double[][] a, double[][] b) {
@@ -392,8 +392,6 @@ public class Matriks {
         }
         return c;
     }
-    
-    
 
     public double[][] getInverseMatriks() {
         return null;

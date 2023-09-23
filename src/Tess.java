@@ -3,14 +3,14 @@ import utilities.Matriks;
 public class Tess {
     public static void main(String[] args) {
         System.out.println("asd");
-        Matriks m = new Matriks(6);
+        Matriks m = new Matriks(4);
 
-        m.displayAugmentedMatrix(6);
-        m.readSPLFromCLI(6);
-        m.displayAugmentedMatrix(6);
-        m.getRowEchelon(6);
-        System.out.println("asd");
+        m.displayMatrix(4);
+        m.readFromCLI(4);
+        m.displayMatrix(4);
 
-        m.displayAugmentedMatrix(6);
+        System.out.println(m.getDeterminantOBE(4, 4));
+
+        m.displayMatrix(4);
     }
 }
