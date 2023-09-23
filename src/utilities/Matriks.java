@@ -134,16 +134,21 @@ public class Matriks {
             if (!isRowZero(i, n)) {
 
                 if (this.mtrx[i][col] != 0) {
+                    // dibagi sek dengan dirinya sendiri biar satu
                     divideRow(i, this.mtrx[i][col], n + 1);
-                    for (int j = i + 1; j < n; j++) {
-                        if (this.mtrx[j][col] != 0) {
-                            substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
-                        }
+                    for (int j = i+1; j < n; j++) {
+                            // untuk ngenolkan yg bukan baris 1
+                            if (this.mtrx[j][col] != 0) {
+                                substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                            }   
                     }
                 } else {
+                    // gimana kalo ada baris dan kolom yg nol
                     if (isColZero(col, n)) {
+                        // majuin kolomnya aja, tapi i jangan nambah
                         i--;
                     } else {
+                        // kalo kolomnya ndak nol
                         int temp = i;
                         int idx = -1;
                         while (temp < n && idx == -1) {
@@ -157,9 +162,69 @@ public class Matriks {
                         } else {
                             add2Row(i, idx, 1, n + 1);
                             divideRow(i, this.mtrx[i][col], n + 1);
-                            for (int j = i + 1; j < n; j++) {
-                                if (this.mtrx[j][col] != 0) {
-                                    substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                            for (int j = i+1; j < n; j++) {
+                                    if (this.mtrx[j][col] != 0) {
+                                        substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                                    }
+                            }
+                        }
+                    }
+                }
+                col++;
+            }
+        }
+    }
+
+    // public void getEselonMatTereduksi(int n) {
+    public void getReductionRowEchelon(int n) {
+        // cek yang kosongngan semua taruh ke bawah
+        for (int i = 0; i < n; i++) {
+            if (isRowZero(i, n)) {
+                for (int x = i + 1; x < n; x++) {
+                    swapRowMatrix(i, x, n + 1);
+                }
+            }
+        }
+        int col = 0;
+        for (int i = 0; i < n; i++) {
+            if (!isRowZero(i, n)) {
+
+                if (this.mtrx[i][col] != 0) {
+                    // dibagi sek dengan dirinya sendiri biar satu
+                    divideRow(i, this.mtrx[i][col], n + 1);
+                    for (int j = 0; j < n; j++) {
+                        if (j != i){
+                            // untuk ngenolkan yg bukan baris 1
+                            if (this.mtrx[j][col] != 0) {
+                                substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                            }
+                        }
+                    }
+                } else {
+                    // gimana kalo ada baris dan kolom yg nol
+                    if (isColZero(col, n)) {
+                        // majuin kolomnya aja, tapi i jangan nambah
+                        i--;
+                    } else {
+                        // kalo kolomnya ndak nol
+                        int temp = i;
+                        int idx = -1;
+                        while (temp < n && idx == -1) {
+                            if (this.mtrx[temp][col] != 0) {
+                                idx = temp;
+                            }
+                            temp++;
+                        }
+                        if (idx == -1) {
+                            i--;
+                        } else {
+                            add2Row(i, idx, 1, n + 1);
+                            divideRow(i, this.mtrx[i][col], n + 1);
+                            for (int j = 0; j < n; j++) {
+                                if (j != i){
+                                    if (this.mtrx[j][col] != 0) {
+                                        substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                                    }
                                 }
                             }
                         }
@@ -169,6 +234,20 @@ public class Matriks {
             }
         }
     }
+
+    // public void getEselonMatTereduksi(int n) {
+    //     // cek yang kosongngan semua taruh ke bawah
+    //     for (int i = 0; i < n; i++) {
+    //         if (isRowZero(i, n)) {
+    //             for (int x = i + 1; x < n; x++) {
+    //                 swapRowMatrix(i, x, n + 1);
+    //             }
+    //         }
+    //     }
+    //     int col = 0;
+    //     for (int i = 0; i < n; i++) {
+    //         if (!isRowZero(i, n)) 
+    // }
 
     public Matriks(int n) {
         this.mtrx = new double[n][n + 1];
