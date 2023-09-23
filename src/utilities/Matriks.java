@@ -30,7 +30,7 @@ public class Matriks {
     public void displayMatrix(int n) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.println(this.mtrx[i][j] + " ");
+                System.out.print(this.mtrx[i][j] + " ");
             }
             System.out.println("\n");
         }
@@ -40,7 +40,7 @@ public class Matriks {
         // untuk matrix
         Scanner objScan = new Scanner(System.in);
         for (int i = 0; i < n; i++) {
-            for (int j = 0; i < n; j++) {
+            for (int j = 0; j < n; j++) {
                 int temp = objScan.nextInt();
                 mtrx[i][j] = temp;
             }
@@ -108,7 +108,7 @@ public class Matriks {
 
     public void add2Row(int a, int b, double n, int col) {
         // row a - n*row b
-        for (int i = 0; i < col; i++) {
+                for (int i = 0; i < col; i++) {
             this.mtrx[a][i] += (n * this.mtrx[b][i]);
         }
     }
@@ -176,12 +176,12 @@ public class Matriks {
     }
 
     // public void getEselonMatTereduksi(int n) {
-    public void getReductionRowEchelon(int n) {
+    public void getReductionRowEchelon(int n, int o) {
         // cek yang kosongngan semua taruh ke bawah
         for (int i = 0; i < n; i++) {
             if (isRowZero(i, n)) {
                 for (int x = i + 1; x < n; x++) {
-                    swapRowMatrix(i, x, n + 1);
+                    swapRowMatrix(i, x, o);
                 }
             }
         }
@@ -191,12 +191,12 @@ public class Matriks {
 
                 if (this.mtrx[i][col] != 0) {
                     // dibagi sek dengan dirinya sendiri biar satu
-                    divideRow(i, this.mtrx[i][col], n + 1);
+                    divideRow(i, this.mtrx[i][col], o);
                     for (int j = 0; j < n; j++) {
                         if (j != i){
                             // untuk ngenolkan yg bukan baris 1
                             if (this.mtrx[j][col] != 0) {
-                                substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                                substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
                             }
                         }
                     }
@@ -218,12 +218,12 @@ public class Matriks {
                         if (idx == -1) {
                             i--;
                         } else {
-                            add2Row(i, idx, 1, n + 1);
-                            divideRow(i, this.mtrx[i][col], n + 1);
+                            add2Row(i, idx, 1, o);
+                            divideRow(i, this.mtrx[i][col], o);
                             for (int j = 0; j < n; j++) {
                                 if (j != i){
                                     if (this.mtrx[j][col] != 0) {
-                                        substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                                        substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
                                     }
                                 }
                             }
@@ -235,19 +235,6 @@ public class Matriks {
         }
     }
 
-    // public void getEselonMatTereduksi(int n) {
-    //     // cek yang kosongngan semua taruh ke bawah
-    //     for (int i = 0; i < n; i++) {
-    //         if (isRowZero(i, n)) {
-    //             for (int x = i + 1; x < n; x++) {
-    //                 swapRowMatrix(i, x, n + 1);
-    //             }
-    //         }
-    //     }
-    //     int col = 0;
-    //     for (int i = 0; i < n; i++) {
-    //         if (!isRowZero(i, n)) 
-    // }
 
     public Matriks(int n) {
         this.mtrx = new double[n][n + 1];
@@ -256,5 +243,62 @@ public class Matriks {
     public double[][] getMatriks() {
         return mtrx;
     }
+
+    public double[][] expandMtrik(double[][] arr, int factor) {
+        double[][] hasil = new double[arr.length * factor][arr[0].length * factor];
+        for (int i = 0; i < hasil.length; i++) {
+            for (int j = 0; j < hasil[i].length; j++) {
+                int orgRow = i / ((arr.length - 1) * factor);
+                int orgCol = j / ((arr[0].length - 1) * factor);
+                hasil[i][j] = arr[orgRow][orgCol];
+            }
+        }
+
+        return hasil;
+    }
+
+    public void printExpandMtrik(int[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
+    public void inverseMatrixOBE(int n) {
+        double[][] temp = new double[n][n*2];
+        double[][] mIdentitas = new double[n][n];
+        // masukkan ke matriks temp;
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++){
+                temp[i][j] = this.mtrx[i][j];
+                if (i == j){
+                    mIdentitas[i][j] = 1;
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                temp[i][n+j] = mIdentitas[i][j];
+            }
+        }
+        this.mtrx = temp;
+        getReductionRowEchelon(n, n*2);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                this.mtrx[i][j] = this.mtrx[i][n+j];
+            }
+        }
+    }
+    
+    
+
+    public double[][] getInverseMatriks() {
+        return null;
+    }
+
+
 
 }
