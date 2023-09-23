@@ -48,7 +48,7 @@ public class Matriks {
         objScan.close();
     }
 
-    public double determinanEksKof(double[][] m, int n) {
+    public double getDeterminanEksKof(double[][] m, int n) {
         // untuk matrix n*n cari determinan dengan ekspansi kofaktor
         double res;
         res = 0.0;
@@ -68,7 +68,7 @@ public class Matriks {
                     }
                     x++;
                 }
-                res += (double) (((ii % 2 == 0) ? 1.0 : -1.0) * (m[0][ii]) * determinanEksKof(temp, n - 1));
+                res += (double) (((ii % 2 == 0) ? 1.0 : -1.0) * (m[0][ii]) * getDeterminanEksKof(temp, n - 1));
             }
         }
         return res;
@@ -131,10 +131,10 @@ public class Matriks {
 
     public double[] cramerMethod(int n) {
         double[] res = new double[n];
-        double det = determinanEksKof(this.mtrx, n);
+        double det = getDeterminanEksKof(this.mtrx, n);
         for (int i = 0; i < n; i++) {
             swapColMatrix(i, n, n);
-            res[i] = determinanEksKof(this.mtrx, n);
+            res[i] = getDeterminanEksKof(this.mtrx, n);
             swapColMatrix(i, n, n);
         }
         for (int i = 0; i < n; i++) {
@@ -197,6 +197,68 @@ public class Matriks {
                 col++;
             }
         }
+    }
+    public double getDeterminantOBE(int n, int o) {
+        // cek yang kosongngan semua taruh ke bawah
+        int pow = 0;
+        double multi = 1.0;
+        for (int i = 0; i < n; i++) {
+            if (isRowZero(i, n)) {
+                for (int x = i + 1; x < n; x++) {
+                    swapRowMatrix(i, x, o);
+                    pow++;
+                }
+            }
+        }
+        int col = 0;
+        for (int i = 0; i < n; i++) {
+            if (!isRowZero(i, n)) {
+
+                if (this.mtrx[i][col] != 0) {
+                    // dibagi sek dengan dirinya sendiri biar satu
+                    divideRow(i, this.mtrx[i][col], o);
+                    multi/=this.mtrx[i][col];
+                    for (int j = i + 1; j < n; j++) {
+                        // untuk ngenolkan yg bukan baris 1
+                        if (this.mtrx[j][col] != 0) {
+                            substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
+                        }
+                    }
+                } else {
+                    // gimana kalo ada baris dan kolom yg nol
+                    if (isColZero(col, n)) {
+                        // majuin kolomnya aja, tapi i jangan nambah
+                        i--;
+                    } else {
+                        // kalo kolomnya ndak nol
+                        int temp = i;
+                        int idx = -1;
+                        while (temp < n && idx == -1) {
+                            if (this.mtrx[temp][col] != 0) {
+                                idx = temp;
+                            }
+                            temp++;
+                        }
+                        if (idx == -1) {
+                            i--;
+                        } else {
+                            add2Row(i, idx, 1, o);
+                            divideRow(i, this.mtrx[i][col], o);
+                            multi/=this.mtrx[i][col];
+
+
+                            for (int j = i + 1; j < n; j++) {
+                                if (this.mtrx[j][col] != 0) {
+                                    substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
+                                }
+                            }
+                        }
+                    }
+                }
+                col++;
+            }
+        }
+        return (double) ((Math.pow(-1, pow))/multi);
     }
 
     // public void getEselonMatTereduksi(int n) {
