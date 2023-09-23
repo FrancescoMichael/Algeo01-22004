@@ -15,7 +15,16 @@ public class Matriks {
                 mtrx[i][j] = temp;
             }
         }
-        objScan.close();
+        // objScan.close();
+    }
+
+    public void displayDataMatrix(double[][] mat) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                System.out.print(mat[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     public void displayAugmentedMatrix(int n) {
@@ -45,7 +54,7 @@ public class Matriks {
                 mtrx[i][j] = temp;
             }
         }
-        objScan.close();
+        // objScan.close();
     }
 
     public double getDeterminanEksKof(double[][] m, int n) {
@@ -129,16 +138,16 @@ public class Matriks {
         }
     }
 
-    public double[] cramerMethod(int n) {
-        double[] res = new double[n];
+    public double[][] cramerMethod(int n) {
+        double[][] res = new double[n][1];
         double det = getDeterminanEksKof(this.mtrx, n);
         for (int i = 0; i < n; i++) {
             swapColMatrix(i, n, n);
-            res[i] = getDeterminanEksKof(this.mtrx, n);
+            res[i][0] = getDeterminanEksKof(this.mtrx, n);
             swapColMatrix(i, n, n);
         }
         for (int i = 0; i < n; i++) {
-            res[i] /= det;
+            res[i][0] /= det;
         }
         return res;
 
@@ -322,8 +331,8 @@ public class Matriks {
         }
     }
 
-    public Matriks(int n) {
-        this.mtrx = new double[n][n + 1];
+    public Matriks(int n, int o) {
+        this.mtrx = new double[n][o];
     }
 
     public double[][] getMatriks() {
@@ -372,9 +381,11 @@ public class Matriks {
         }
         this.mtrx = temp;
         getReductionRowEchelon(n, n * 2);
+        temp = this.mtrx;
+        this.mtrx = new double[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                this.mtrx[i][j] = this.mtrx[i][n + j];
+                this.mtrx[i][j] = temp[i][n + j];
             }
         }
     }
