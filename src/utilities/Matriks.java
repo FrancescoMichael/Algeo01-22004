@@ -58,7 +58,7 @@ public class Matriks {
             for (int ii = 0; ii < n; ii++) {
                 int x = 0;
                 double temp[][] = new double[n - 1][n - 1];
-                for (int i = 0; i < n; i++) {
+                for (int i = 1; i < n; i++) {
                     int y = 0;
                     for (int j = 0; j < n; j++) {
                         if (j != ii) {
@@ -74,12 +74,21 @@ public class Matriks {
         return res;
     }
 
-    public void swapRowMatrix(int a, int b, int col) {
-        for (int i = 0; i < col; i++) {
+    public void swapRowMatrix(int a, int b, int row) {
+        for (int i = 0; i < row; i++) {
             double temp;
             temp = this.mtrx[a][i];
             this.mtrx[a][i] = this.mtrx[b][i];
             this.mtrx[b][i] = temp;
+        }
+    }
+
+    public void swapColMatrix(int a, int b, int col) {
+        for (int i = 0; i < col; i++) {
+            double temp;
+            temp = this.mtrx[i][a];
+            this.mtrx[i][a] = this.mtrx[i][b];
+            this.mtrx[i][b] = temp;
         }
     }
 
@@ -108,7 +117,7 @@ public class Matriks {
 
     public void add2Row(int a, int b, double n, int col) {
         // row a - n*row b
-                for (int i = 0; i < col; i++) {
+        for (int i = 0; i < col; i++) {
             this.mtrx[a][i] += (n * this.mtrx[b][i]);
         }
     }
@@ -118,6 +127,21 @@ public class Matriks {
         for (int i = 0; i < col; i++) {
             this.mtrx[a][i] /= n;
         }
+    }
+
+    public double[] cramerMethod(int n) {
+        double[] res = new double[n];
+        double det = determinanEksKof(this.mtrx, n);
+        for (int i = 0; i < n; i++) {
+            swapColMatrix(i, n, n);
+            res[i] = determinanEksKof(this.mtrx, n);
+            swapColMatrix(i, n, n);
+        }
+        for (int i = 0; i < n; i++) {
+            res[i] /= det;
+        }
+        return res;
+
     }
 
     public void getRowEchelon(int n) {
@@ -136,11 +160,11 @@ public class Matriks {
                 if (this.mtrx[i][col] != 0) {
                     // dibagi sek dengan dirinya sendiri biar satu
                     divideRow(i, this.mtrx[i][col], n + 1);
-                    for (int j = i+1; j < n; j++) {
-                            // untuk ngenolkan yg bukan baris 1
-                            if (this.mtrx[j][col] != 0) {
-                                substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
-                            }   
+                    for (int j = i + 1; j < n; j++) {
+                        // untuk ngenolkan yg bukan baris 1
+                        if (this.mtrx[j][col] != 0) {
+                            substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                        }
                     }
                 } else {
                     // gimana kalo ada baris dan kolom yg nol
@@ -162,10 +186,10 @@ public class Matriks {
                         } else {
                             add2Row(i, idx, 1, n + 1);
                             divideRow(i, this.mtrx[i][col], n + 1);
-                            for (int j = i+1; j < n; j++) {
-                                    if (this.mtrx[j][col] != 0) {
-                                        substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
-                                    }
+                            for (int j = i + 1; j < n; j++) {
+                                if (this.mtrx[j][col] != 0) {
+                                    substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], n + 1);
+                                }
                             }
                         }
                     }
@@ -193,7 +217,7 @@ public class Matriks {
                     // dibagi sek dengan dirinya sendiri biar satu
                     divideRow(i, this.mtrx[i][col], o);
                     for (int j = 0; j < n; j++) {
-                        if (j != i){
+                        if (j != i) {
                             // untuk ngenolkan yg bukan baris 1
                             if (this.mtrx[j][col] != 0) {
                                 substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
@@ -221,7 +245,7 @@ public class Matriks {
                             add2Row(i, idx, 1, o);
                             divideRow(i, this.mtrx[i][col], o);
                             for (int j = 0; j < n; j++) {
-                                if (j != i){
+                                if (j != i) {
                                     if (this.mtrx[j][col] != 0) {
                                         substract2Row(j, i, this.mtrx[j][col] / this.mtrx[i][col], o);
                                     }
@@ -234,7 +258,6 @@ public class Matriks {
             }
         }
     }
-
 
     public Matriks(int n) {
         this.mtrx = new double[n][n + 1];
@@ -268,37 +291,33 @@ public class Matriks {
     }
 
     public void inverseMatrixOBE(int n) {
-        double[][] temp = new double[n][n*2];
+        double[][] temp = new double[n][n * 2];
         double[][] mIdentitas = new double[n][n];
         // masukkan ke matriks temp;
         for (int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++){
+            for (int j = 0; j < n; j++) {
                 temp[i][j] = this.mtrx[i][j];
-                if (i == j){
+                if (i == j) {
                     mIdentitas[i][j] = 1;
                 }
             }
         }
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                temp[i][n+j] = mIdentitas[i][j];
+                temp[i][n + j] = mIdentitas[i][j];
             }
         }
         this.mtrx = temp;
-        getReductionRowEchelon(n, n*2);
+        getReductionRowEchelon(n, n * 2);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                this.mtrx[i][j] = this.mtrx[i][n+j];
+                this.mtrx[i][j] = this.mtrx[i][n + j];
             }
         }
     }
-    
-    
 
     public double[][] getInverseMatriks() {
         return null;
     }
-
-
 
 }
