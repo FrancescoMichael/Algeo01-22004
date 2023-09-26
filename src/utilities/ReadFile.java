@@ -150,7 +150,7 @@ public class ReadFile {
         }
     }
 
-    public static void bicubicInterpolasi(){
+    public static void readFileBicubicInterpolasi(){
         try{
             String[] tempData;
             tempData = new String[1000];
