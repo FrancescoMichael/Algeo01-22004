@@ -30,7 +30,7 @@ public class ReadFile {
         return ans;
     }
 
-    public static void readFile() {
+    public static void readFileSPL() {
         try{
             String[] tempData;
             tempData = new String[1000];
@@ -64,6 +64,79 @@ public class ReadFile {
             for(int i = 0; i < rowMat; i++){
                 for(int j = 0; j < colMat; j++){
                     System.out.print(mtrx[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println();
+            }
+
+            myPath.close();
+            myReader.close();
+        } catch(FileNotFoundException e){
+            System.out.println("Your file is wrong.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void readFileInterpolasi(){
+        try{
+            String[] tempData;
+            tempData = new String[1000];
+
+            Scanner myPath = new Scanner(System.in);
+            System.out.println("Input your file path : ");
+            String path = myPath.nextLine();
+            File myObj = new File(path);
+            Scanner myReader = new Scanner(myObj);
+
+            int rowMat = 0, colMat = 2;
+
+            // baca file
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                tempData[rowMat] = data;
+                rowMat++;
+            }
+
+            // convert ke matrix
+            // mtrx berbentuk rowMat x 2
+            double mtrx[][] = datatoMatrix(tempData, rowMat, colMat); 
+
+            // for(int i = 0; i < rowMat; i++){
+            //     for(int j = 0; j < colMat; j++){
+            //         System.out.print(mtrx[i][j]);
+            //         System.out.print(" ");
+            //     }
+            //     System.out.println();
+            // }
+
+            // menggunakan bentuk Ax = B, cari matrix x
+
+            // convert ke matrix A
+            double[][] A;
+            A = new double[rowMat][rowMat];
+            for(int i = 0; i < rowMat; i++){
+                for(int j = 0; j < rowMat; j++){
+                    A[i][j] = Math.pow(mtrx[i][0], j);
+                }
+            }
+
+            for(int i = 0; i < rowMat; i++){
+                for(int j = 0; j < rowMat; j++){
+                    System.out.print(A[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println();
+            }
+
+            // convert ke matrix B
+            double[][] B;
+            B = new double[rowMat][1];
+            for(int i = 0; i < rowMat; i++){
+                B[i][0] = mtrx[i][1];
+            }
+            for(int i = 0; i < rowMat; i++){
+                for(int j = 0; j < 1; j++){
+                    System.out.print(B[i][j]);
                     System.out.print(" ");
                 }
                 System.out.println();
