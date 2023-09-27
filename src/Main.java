@@ -145,7 +145,7 @@ public class Main {
                     System.out.println("Input your file path : ");
                     String path = myPath.nextLine();
                     double[][] input = ReadFile.readFileBicubicInterpolasi(path);
-                    Bicubic.Bicubic(input, input.length);
+                    // Bicubic.Bicubic(input, input.length);
                 }
             } else if (choice == 6) {
                 methodInput();
