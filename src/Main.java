@@ -106,38 +106,6 @@ public class Main {
                         // // sementara display matrix hasilnya dl aja
                         // m.displayDataMatrix(result);
                     } else if (inputChoice == 2) {
-                        String path = objScan.nextLine();
-                        double[][] mtrx = ReadFile.readFileInterpolasi(path);
-                        Matriks m = new Matriks(mtrx.length, mtrx.length);
-                        double[][] a = new double[mtrx.length][mtrx.length];
-                        double[][] b = new double[mtrx.length][1];
-                        for (int i = 0; i < mtrx.length; i++) {
-                            for (int j = 0; j < mtrx[0].length; j++) {
-                                if (j == mtrx.length) {
-                                    b[i][0] = mtrx[i][j];
-                                } else {
-                                    a[i][j] = mtrx[i][j];
-                                }
-                            }
-                        }
-                        m.readFromVariable(a);
-                        m.inverseMatrixOBE(mtrx.length);
-
-                        double[][] res = m.multiplyMatrix(m.getMatriks(), b);
-                        System.out.println("masukkan data testnya");
-                        double test = objScan.nextDouble();
-                        double result = 0;
-                        for (int i = 0; i < mtrx.length; i++) {
-                            if (i == 0) {
-                                result += res[i][0];
-                                System.out.println(res[i][0]);
-                            } else {
-                                System.out.println(" + " + res[i][0]);
-                                result += (res[i][0] * Math.pow(test, i));
-                            }
-                        }
-                        System.out.println(" = y");
-                        System.out.println("hasilnya " + result);
 
                     }
 
@@ -167,6 +135,40 @@ public class Main {
                     }
 
                 }
+            } else if (choice == 4) {
+                String path = objScan.nextLine();
+                double[][] mtrx = ReadFile.readFileInterpolasi(path);
+                Matriks m = new Matriks(mtrx.length, mtrx.length);
+                double[][] a = new double[mtrx.length][mtrx.length];
+                double[][] b = new double[mtrx.length][1];
+                for (int i = 0; i < mtrx.length; i++) {
+                    for (int j = 0; j < mtrx[0].length; j++) {
+                        if (j == mtrx.length) {
+                            b[i][0] = mtrx[i][j];
+                        } else {
+                            a[i][j] = mtrx[i][j];
+                        }
+                    }
+                }
+                m.readFromVariable(a);
+                m.inverseMatrixOBE(mtrx.length);
+
+                double[][] res = m.multiplyMatrix(m.getMatriks(), b);
+                System.out.println("masukkan data testnya");
+                double test = objScan.nextDouble();
+                double result = 0;
+                for (int i = 0; i < mtrx.length; i++) {
+                    if (i == 0) {
+                        result += res[i][0];
+                        System.out.println(res[i][0]);
+                    } else {
+                        System.out.println(" + " + res[i][0]);
+                        result += (res[i][0] * Math.pow(test, i));
+                    }
+                }
+                System.out.println(" = y");
+                System.out.println("hasilnya " + result);
+
             } else if (choice == 5) {
                 methodInput();
                 int inputChoice = objScan.nextInt();
