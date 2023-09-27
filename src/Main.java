@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import utilities.Matriks;
+import utilities.*;
 
 public class Main {
     public static void methodInput() {
@@ -142,6 +142,15 @@ public class Main {
 
                 } else if (inputChoice == 2) {
 
+                }
+            } else if (choice == 6) {
+                methodInput();
+                int inputChoice = objScan.nextInt();
+                if (inputChoice == 1) {
+
+                } else if (inputChoice == 2) {
+                    double[][] input = ReadFile.readFileRegresi();
+                    RegresiLinear.multiRegresi(input, input.length);
                 }
             } else if (choice == 7) {
                 System.out.println("makasih cok");

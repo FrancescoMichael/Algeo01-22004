@@ -2,8 +2,6 @@ package utilities;
 
 import java.util.Scanner;
 
-import utilities.*;
-
 public class RegresiLinear {
     public static void multiRegresi(double[][] mtrx, int n) {
 
