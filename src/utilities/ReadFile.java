@@ -372,7 +372,7 @@ public class ReadFile {
                 }
             }
             
-            double [][] ans = new double [16][17];
+            double [][] ans = new double [17][17];
 
             for(int i = 0; i < 16; i++){
                 for(int j = 0; j < 17; j++){
@@ -385,6 +385,13 @@ public class ReadFile {
                     // System.out.print(" ");
                 }
                 // System.out.println();
+            }
+            
+            ans[16][0] = a;
+            ans[16][1] = b;
+
+            for(int i = 2; i < 17; i++){
+                ans[16][i] = 0;
             }
 
             // myPath.close();
