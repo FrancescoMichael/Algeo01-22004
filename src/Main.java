@@ -141,12 +141,12 @@ public class Main {
                 String path = myPath.nextLine();
 
                 double[][] mtrx = ReadFile.readFileInterpolasi(path);
-                Matriks m = new Matriks(mtrx.length-1, mtrx.length-1);
-                double[][] a = new double[mtrx.length-1][mtrx.length-1];
-                double[][] b = new double[mtrx.length-1][1];
-                for (int i = 0; i < mtrx.length-1; i++) {
+                Matriks m = new Matriks(mtrx.length - 1, mtrx.length - 1);
+                double[][] a = new double[mtrx.length - 1][mtrx.length - 1];
+                double[][] b = new double[mtrx.length - 1][1];
+                for (int i = 0; i < mtrx.length - 1; i++) {
                     for (int j = 0; j < mtrx[0].length; j++) {
-                        if (j == mtrx.length-1) {
+                        if (j == mtrx.length - 1) {
                             b[i][0] = mtrx[i][j];
                         } else {
                             a[i][j] = mtrx[i][j];
@@ -154,13 +154,13 @@ public class Main {
                     }
                 }
                 m.readFromVariable(a);
-                m.inverseMatrixOBE(mtrx.length-1);
+                m.inverseMatrixOBE(mtrx.length - 1);
 
                 double[][] res = m.multiplyMatrix(m.getMatriks(), b);
                 // System.out.println("masukkan data testnya");
-                double test = mtrx[mtrx.length-1][0];
+                double test = mtrx[mtrx.length - 1][0];
                 double result = 0;
-                for (int i = 0; i < mtrx.length-1; i++) {
+                for (int i = 0; i < mtrx.length - 1; i++) {
                     if (i == 0) {
                         result += res[i][0];
                         System.out.println(res[i][0]);
@@ -181,8 +181,12 @@ public class Main {
                     Scanner myPath = new Scanner(System.in);
                     System.out.println("Input your file path : ");
                     String path = myPath.nextLine();
-                    double[][] input = ReadFile.readFileBicubicInterpolasi(path);
-                    // Bicubic.Bicubic(input, input.length);
+                    double[][] om = ReadFile.readFileBicubicInterpolasi(path);
+                    // double[][] y = ReadFile.readFileBicubicInterpolasi(path);
+                    double[][] hasile = new double[om.length][y.length];
+
+                    hasile = Bicubic.BicubicMase(om,y);
+
                 }
             } else if (choice == 6) {
                 methodInput();
