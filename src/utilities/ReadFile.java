@@ -30,14 +30,14 @@ public class ReadFile {
         return ans;
     }
 
-    public static void readFileSPL() {
+    public static double[][] readFileSPL(String path) {
         try{
             String[] tempData;
             tempData = new String[1000];
 
-            Scanner myPath = new Scanner(System.in);
-            System.out.println("Input your file path : ");
-            String path = myPath.nextLine();
+            // Scanner myPath = new Scanner(System.in);
+            // System.out.println("Input your file path : ");
+            // String path = myPath.nextLine();
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
 
@@ -61,30 +61,33 @@ public class ReadFile {
             // convert ke matrix
             double mtrx[][] = datatoMatrix(tempData, rowMat, colMat); 
 
-            for(int i = 0; i < rowMat; i++){
-                for(int j = 0; j < colMat; j++){
-                    System.out.print(mtrx[i][j]);
-                    System.out.print(" ");
-                }
-                System.out.println();
-            }
+            // for(int i = 0; i < rowMat; i++){
+            //     for(int j = 0; j < colMat; j++){
+            //         System.out.print(mtrx[i][j]);
+            //         System.out.print(" ");
+            //     }
+            //     System.out.println();
+            // }
 
-            myPath.close();
+            // myPath.close();
             myReader.close();
+
+            return mtrx;
         } catch(FileNotFoundException e){
-            System.out.println("Your file is wrong.");
+            // System.out.println("Your file is wrong.");
             e.printStackTrace();
+
+            double[][] ajg = new double[1][1];
+
+            return ajg;
         }
     }
 
-    public static void readFileInterpolasi(){
+    public static double[][] readFileInterpolasi(String path){
         try{
             String[] tempData;
             tempData = new String[1000];
 
-            Scanner myPath = new Scanner(System.in);
-            System.out.println("Input your file path : ");
-            String path = myPath.nextLine();
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
 
@@ -101,14 +104,6 @@ public class ReadFile {
             // mtrx berbentuk rowMat x 2
             double mtrx[][] = datatoMatrix(tempData, rowMat, colMat); 
 
-            // for(int i = 0; i < rowMat; i++){
-            //     for(int j = 0; j < colMat; j++){
-            //         System.out.print(mtrx[i][j]);
-            //         System.out.print(" ");
-            //     }
-            //     System.out.println();
-            // }
-
             // menggunakan bentuk Ax = B, cari matrix x
 
             // convert ke matrix A
@@ -120,44 +115,46 @@ public class ReadFile {
                 }
             }
 
-            for(int i = 0; i < rowMat; i++){
-                for(int j = 0; j < rowMat; j++){
-                    System.out.print(A[i][j]);
-                    System.out.print(" ");
-                }
-                System.out.println();
-            }
-
             // convert ke matrix B
             double[][] B;
             B = new double[rowMat][1];
             for(int i = 0; i < rowMat; i++){
                 B[i][0] = mtrx[i][1];
             }
+
+            double [][] ans = new double [rowMat][rowMat + 1];
+
             for(int i = 0; i < rowMat; i++){
-                for(int j = 0; j < 1; j++){
-                    System.out.print(B[i][j]);
-                    System.out.print(" ");
+                for(int j = 0; j < rowMat + 1; j++){
+                    if(j == rowMat){
+                        ans[i][j] = B[i][0];
+                    }else{
+                        ans[i][j] = A[i][j];
+                    }
                 }
-                System.out.println();
             }
 
-            myPath.close();
             myReader.close();
+
+            return ans;
         } catch(FileNotFoundException e){
-            System.out.println("Your file is wrong.");
+            // System.out.println("Your file is wrong.");
             e.printStackTrace();
+
+            double[][] ajg = new double[1][1];
+
+            return ajg;
         }
     }
 
-    public static void readFileBicubicInterpolasi(){
+    public static double[][] readFileBicubicInterpolasi(String path){
         try{
             String[] tempData;
             tempData = new String[1000];
 
-            Scanner myPath = new Scanner(System.in);
-            System.out.println("Input your file path : ");
-            String path = myPath.nextLine();
+            // Scanner myPath = new Scanner(System.in);
+            // System.out.println("Input your file path : ");
+            // String path = myPath.nextLine();
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
 
@@ -374,36 +371,41 @@ public class ReadFile {
                     }
                 }
             }
+            
+            double [][] ans = new double [16][17];
 
             for(int i = 0; i < 16; i++){
-                for(int j = 0; j < 16; j++){
-                    System.out.print(X[i][j]);
-                    System.out.print(" ");
+                for(int j = 0; j < 17; j++){
+                    if(j == 16){
+                        ans[i][j] = y[i][0];
+                    }else{
+                        ans[i][j] = X[i][j];
+                    }
+                    // System.out.print(ans[i][j]);
+                    // System.out.print(" ");
                 }
-                System.out.println();
+                // System.out.println();
             }
 
-            // for(int i = 0; i < 16; i++){
-            //     System.out.println(y[i][0]);
-            // }
-
-
-            myPath.close();
+            // myPath.close();
             myReader.close();
+
+            return ans;
         } catch(FileNotFoundException e){
-            System.out.println("Your file is wrong.");
+            // System.out.println("Your file is wrong.");
             e.printStackTrace();
+
+            double[][] ajg = new double[1][1];
+
+            return ajg;
         }
     }
 
-    public static double[][] readFileRegresi(){
+    public static double[][] readFileRegresi(String path){
         try{
             String[] tempData;
             tempData = new String[1000];
 
-            Scanner myPath = new Scanner(System.in);
-            System.out.println("Input your file path : ");
-            String path = myPath.nextLine();
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
 
@@ -477,7 +479,7 @@ public class ReadFile {
 
             double [][] ans = new double [colMat][colMat + 1];
 
-            for(int i = 0; i < rowMat; i++){
+            for(int i = 0; i < colMat; i++){
                 for(int j = 0; j < colMat + 1; j++){
                     if(j == colMat){
                         ans[i][j] = y[i][0];
@@ -487,12 +489,12 @@ public class ReadFile {
                 }
             }
 
-            myPath.close();
+            // myPath.close();
             myReader.close();
 
             return ans;
         } catch(FileNotFoundException e){
-            System.out.println("Your file is wrong.");
+            // System.out.println("Your file is wrong.");
             e.printStackTrace();
 
             double[][] ajg = new double[1][1];

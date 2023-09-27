@@ -6,6 +6,16 @@ public class Matriks {
 
     private double[][] mtrx;
 
+    public void readFromCLI(int n, int o) {
+        this.mtrx = new double[n][o];
+                Scanner objScan = new Scanner(System.in);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < o; j++) {
+                this.mtrx[i][j] = objScan.nextDouble();
+            }
+        }
+    }
     public void readFromVariable(double[][] x) {
         int row = x.length;
         int col = x[0].length;

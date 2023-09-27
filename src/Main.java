@@ -135,21 +135,32 @@ public class Main {
                     }
 
                 }
-            } else if (choice == 3) {
+            } else if (choice == 5) {
                 methodInput();
                 int inputChoice = objScan.nextInt();
                 if (inputChoice == 1) {
 
                 } else if (inputChoice == 2) {
-
+                    Scanner myPath = new Scanner(System.in);
+                    System.out.println("Input your file path : ");
+                    String path = myPath.nextLine();
+                    double[][] input = ReadFile.readFileBicubicInterpolasi(path);
+                    Bicubic.Bicubic(input, input.length);
                 }
             } else if (choice == 6) {
                 methodInput();
                 int inputChoice = objScan.nextInt();
                 if (inputChoice == 1) {
-
+                    // int n = objScan.nextInt();
+                    // int c = objScan.nextInt();
+                    // Matriks m = new Matriks(n, n + 1);
+                    // m.readFromCli(n, c);
+                    // RegresiLinear.multiRegresi(m.getMatriks(), n);
                 } else if (inputChoice == 2) {
-                    double[][] input = ReadFile.readFileRegresi();
+                    Scanner myPath = new Scanner(System.in);
+                    System.out.println("Input your file path : ");
+                    String path = myPath.nextLine();
+                    double[][] input = ReadFile.readFileRegresi(path);
                     RegresiLinear.multiRegresi(input, input.length);
                 }
             } else if (choice == 7) {
