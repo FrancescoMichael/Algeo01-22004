@@ -43,7 +43,20 @@ public class Bicubic {
         double[][] jawa = m.multiplyMatrix(m.getMatriks(), y);
         return jawa;
     }
-    
+
+    public double sangarOg(double[][] wongpusat, double a, double b) {
+        double dadine = 1;
+        Matriks m = new Matriks(16,16);
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                dadine *= wongpusat[i][j] * Math.pow(a, i) * Math.pow(b, j);
+            }
+        }
+
+        return dadine;
+
+    }    
 
     // asumsikan input valid
     // public static void Bicubic(double [][] y, double [][] X, int n, int o){ 
