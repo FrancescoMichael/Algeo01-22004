@@ -396,7 +396,7 @@ public class ReadFile {
         }
     }
 
-    public static void readFileRegresi(){
+    public static double[][] readFileRegresi(){
         try{
             String[] tempData;
             tempData = new String[1000];
@@ -474,28 +474,30 @@ public class ReadFile {
                     
                 }
             }
-            
-            for(int i = 0; i < colMat; i++){
-                for(int j = 0; j < colMat; j++){
-                    System.out.print(X[i][j]);
-                    System.out.print(" ");
-                }
-                System.out.println();
-            }
 
-            for(int i = 0; i < colMat; i++){
-                for(int j = 0; j < 1; j++){
-                    System.out.print(y[i][j]);
-                    System.out.print(" ");
+            double [][] ans = new double [colMat][colMat + 1];
+
+            for(int i = 0; i < rowMat; i++){
+                for(int j = 0; j < colMat + 1; j++){
+                    if(j == colMat){
+                        ans[i][j] = y[i][0];
+                    }else{
+                        ans[i][j] = X[i][j];
+                    }
                 }
-                System.out.println();
             }
 
             myPath.close();
             myReader.close();
+
+            return ans;
         } catch(FileNotFoundException e){
             System.out.println("Your file is wrong.");
             e.printStackTrace();
+
+            double[][] ajg = new double[1][1];
+
+            return ajg;
         }
     }
 }
