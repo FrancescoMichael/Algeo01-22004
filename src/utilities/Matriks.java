@@ -6,6 +6,16 @@ public class Matriks {
 
     private double[][] mtrx;
 
+    public void readFromVariable(double[][] x) {
+        int row = x.length;
+        int col = x[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                this.mtrx[i][j] = x[i][j];
+            }
+        }
+    }
+
     public void readSPLFromCLI(int n) {
         // untuk augmented matrix
         Scanner objScan = new Scanner(System.in);
@@ -404,8 +414,8 @@ public class Matriks {
         return c;
     }
 
-    public double[][] getInverseMatriks() {
-        return null;
-    }
+    // public double[][] getInverseMatriks() {
+    // return null;
+    // }
 
 }
