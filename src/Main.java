@@ -182,11 +182,42 @@ public class Main {
                     System.out.println("Input your file path : ");
                     String path = myPath.nextLine();
                     double[][] om = ReadFile.readFileBicubicInterpolasi(path);
-                    // double[][] y = ReadFile.readFileBicubicInterpolasi(path);
-                    double[][] hasile = new double[om.length][y.length];
+                    // for(int i = 0; i < 17; i++){
+                    //     for(int j = 0; j < 17; j++){
+                    //         System.out.print(om[i][j] + " ");
+                    //     }
+                    //     System.out.println();
+                    // }
+                    
+                    double[][] kodok = ReadFile.readFileBicubicInterpolasi(path);
+                    double[][] hasile = new double[16][16];
+                    for (int i = 0; i < 16; i++) {
+                        for (int j = 0; j < 16; j++) {
+                            hasile[i][j] = om[i][j];
+                            // System.out.print(hasile[i][j]);
+                            // System.out.print(" ");
+                        }
+                        // System.out.println();
+                    }
+                    
+                    // iki y
+                    double[][] y = new double[16][1];
+                    for (int i= 0; i < 16; i++) {
+                        y[i][0] = om[i][16];
+                    }
+                    // iki a
+                    double a = om[16][0];
+                    // iki b
+                    double b = om[16][1];
 
-                    hasile = Bicubic.BicubicMase(om,y);
+                    hasile = Bicubic.BicubicMase(hasile,y);
+                    // // for (int i = 0; i<16; i++) {
+                        
+                    // //         System.out.println(hasile[i][0] + " ");
+                        
+                    // // }
 
+                    System.out.println("hasilnya " + Bicubic.sangarOgXYneKetemu(hasile, a, b));
                 }
             } else if (choice == 6) {
                 methodInput();

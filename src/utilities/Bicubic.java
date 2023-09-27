@@ -31,12 +31,13 @@ public class Bicubic {
         return anyar;
     }
 
-    public double[][] Bicubic(double[][] x, double[][] y) {
+    public static double[][] BicubicMase(double[][] x, double[][] y) {
         // mengalikan X  yang sudah di inverse dengan Y
         Matriks m = new Matriks(16,16);
         // m.readFromVariable(inverseX(x));
         m.readFromVariable(x);
         m.inverseMatrixOBE(16);
+        m.displayMatrix(16);
 
         // m.readFromVariable(y);
         
@@ -44,15 +45,36 @@ public class Bicubic {
         return jawa;
     }
 
-    public double sangarOg(double[][] wongpusat, double a, double b) {
-        double dadine = 1;
+    public static double sangarOgXYneKetemu(double[][] wongpusat, double a, double b) {
+        double dadine = 0;
         Matriks m = new Matriks(16,16);
+        int xxx = 0;
 
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                dadine *= wongpusat[i][j] * Math.pow(a, i) * Math.pow(b, j);
-            }
-        }
+        double suku= 0;
+
+                for(int j = 0; j < 4; j++){
+                    for(int i = 0; i < 4; i++){
+                        if(a == 0 && (i+j) == 0){
+                            suku = 1;
+                        }else{
+                            suku = Math.pow(a, i+j);
+                        }
+                        // if(a == 0 && (i) <= 0){
+                        //     suku1 = 1;
+                        // }else{
+                        //     suku1 = Math.pow(a, i);
+                        // }
+                            
+                        // if(b == 0 && (j) <= 0){
+                        //     suku2 = 1;
+                        // }else{
+                        //     suku2 = Math.pow(b, j);
+                        // }
+                    
+                        dadine+=(suku*wongpusat[xxx][0]);
+                        xxx++;
+                    }
+                }
 
         return dadine;
 
