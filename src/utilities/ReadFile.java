@@ -100,9 +100,12 @@ public class ReadFile {
                 rowMat++;
             }
 
+            double x = Double.valueOf(tempData[rowMat-1]);
+            rowMat--;
+            
             // convert ke matrix
             // mtrx berbentuk rowMat x 2
-            double mtrx[][] = datatoMatrix(tempData, rowMat - 1, colMat); 
+            double mtrx[][] = datatoMatrix(tempData, rowMat, colMat); 
 
             // menggunakan bentuk Ax = B, cari matrix x
 
@@ -134,7 +137,7 @@ public class ReadFile {
                 }
             }
 
-            ans[rowMat][0] = Double.valueOf(tempData[rowMat-1]);;
+            ans[rowMat][0] = x;
 
             myReader.close();
 
