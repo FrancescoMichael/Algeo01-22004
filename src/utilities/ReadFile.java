@@ -395,4 +395,107 @@ public class ReadFile {
             e.printStackTrace();
         }
     }
+
+    public static void readFileRegresi(){
+        try{
+            String[] tempData;
+            tempData = new String[1000];
+
+            Scanner myPath = new Scanner(System.in);
+            System.out.println("Input your file path : ");
+            String path = myPath.nextLine();
+            File myObj = new File(path);
+            Scanner myReader = new Scanner(myObj);
+
+            int rowMat = 0, colMat = 0;
+
+            // baca file
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                tempData[rowMat] = data;
+                rowMat++;
+            }
+
+            //hitung jumlah kolom
+            for(int i = 0; i < tempData[0].length(); i++){
+                if(tempData[0].charAt(i) == ' '){
+                    colMat++;
+                }
+            }
+            colMat++;
+
+            double mtrx[][] = datatoMatrix(tempData, rowMat, colMat);
+
+            int n = rowMat; // banyak sampel
+            int k = colMat-1; // banyak parameter
+
+            // persamaan berbentuk y = bX, cari b
+
+            // matiks y
+            double[][] y = new double[colMat][1];
+            for(int ind = 0; ind < colMat; ind++){
+                y[ind][0] = 0;
+                for(int i = 0; i < n; i++){
+                    if(ind == 0){
+                        // jumlah yi aja
+                        y[ind][0] += mtrx[i][colMat-1];
+                    }else{
+                        y[ind][0] += mtrx[i][colMat-1]*mtrx[i][ind-1];
+                    }
+                }
+            }
+
+            // matriks X
+            double [][] X = new double[colMat][colMat];
+            for(int ind = 0; ind < colMat; ind++){
+                for(int j = 0; j < colMat; j++){
+                    X[ind][j] = 0;
+                    if(j >= ind){
+                        // koordinat 0,0
+                        if(ind == 0 && j == 0){
+                            X[ind][j] = n;
+                        }else{
+                            // inisiasi nilai 0
+                            X[ind][j] = 0;
+                            // masuk ke sigma
+                            for(int i = 0; i < n; i++){
+                                // baris 0
+                                if(ind == 0 && j > 0){
+                                    X[ind][j] += mtrx[i][j-1];
+                                }else if(ind > 0){
+                                    // baris selain 0
+                                    X[ind][j] += (mtrx[i][j-1])*(mtrx[i][ind-1]);
+                                }
+                            }
+                        }
+                    }else{
+                        X[ind][j] = X[j][ind];
+                    }
+                    
+                }
+            }
+            
+            for(int i = 0; i < colMat; i++){
+                for(int j = 0; j < colMat; j++){
+                    System.out.print(X[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println();
+            }
+
+            for(int i = 0; i < colMat; i++){
+                for(int j = 0; j < 1; j++){
+                    System.out.print(y[i][j]);
+                    System.out.print(" ");
+                }
+                System.out.println();
+            }
+
+            myPath.close();
+            myReader.close();
+        } catch(FileNotFoundException e){
+            System.out.println("Your file is wrong.");
+            e.printStackTrace();
+        }
+    }
 }
