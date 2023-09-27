@@ -136,14 +136,17 @@ public class Main {
 
                 }
             } else if (choice == 4) {
-                String path = objScan.nextLine();
+                Scanner myPath = new Scanner(System.in);
+                System.out.println("Input your file path : ");
+                String path = myPath.nextLine();
+
                 double[][] mtrx = ReadFile.readFileInterpolasi(path);
-                Matriks m = new Matriks(mtrx.length, mtrx.length);
-                double[][] a = new double[mtrx.length][mtrx.length];
-                double[][] b = new double[mtrx.length][1];
-                for (int i = 0; i < mtrx.length; i++) {
+                Matriks m = new Matriks(mtrx.length-1, mtrx.length-1);
+                double[][] a = new double[mtrx.length-1][mtrx.length-1];
+                double[][] b = new double[mtrx.length-1][1];
+                for (int i = 0; i < mtrx.length-1; i++) {
                     for (int j = 0; j < mtrx[0].length; j++) {
-                        if (j == mtrx.length) {
+                        if (j == mtrx.length-1) {
                             b[i][0] = mtrx[i][j];
                         } else {
                             a[i][j] = mtrx[i][j];
@@ -151,13 +154,13 @@ public class Main {
                     }
                 }
                 m.readFromVariable(a);
-                m.inverseMatrixOBE(mtrx.length);
+                m.inverseMatrixOBE(mtrx.length-1);
 
                 double[][] res = m.multiplyMatrix(m.getMatriks(), b);
-                System.out.println("masukkan data testnya");
-                double test = objScan.nextDouble();
+                // System.out.println("masukkan data testnya");
+                double test = mtrx[mtrx.length-1][0];
                 double result = 0;
-                for (int i = 0; i < mtrx.length; i++) {
+                for (int i = 0; i < mtrx.length-1; i++) {
                     if (i == 0) {
                         result += res[i][0];
                         System.out.println(res[i][0]);
