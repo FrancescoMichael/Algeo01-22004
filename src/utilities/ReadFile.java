@@ -139,6 +139,10 @@ public class ReadFile {
 
             ans[rowMat][0] = x;
 
+            for(int i = 1; i < rowMat + 1; i++){
+                ans[rowMat][i] = 0;
+            }
+
             myReader.close();
 
             return ans;
