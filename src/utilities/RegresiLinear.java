@@ -55,11 +55,6 @@ public class RegresiLinear {
             colMat++;
 
             double mtrx[][] = datatoMatrix(tempData, rowMat, colMat);
-            for (int i = 0; i < rowMat; i++) {
-                for (int j = 0; j < colMat; j++) {
-                    System.out.println(mtrx[i][j]);
-                }
-            }
 
             myReader.close();
             return mtrx;
@@ -68,7 +63,7 @@ public class RegresiLinear {
             System.out.println("Your file is wrong.");
             // e.printStackTrace();
 
-            double[][] x = new double[1][1];
+            double[][] x = new double[0][0];
 
             return x;
         }

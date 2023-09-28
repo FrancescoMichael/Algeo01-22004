@@ -235,6 +235,11 @@ public class Main {
                     System.out.println("Input your file path : ");
                     String path = myPath.nextLine();
                     double[][] input = RegresiLinear.readFileRegresi(path);
+                    while (input.length == 0) {
+                        System.out.println("Input your file path : ");
+                        path = myPath.nextLine();
+                        input = RegresiLinear.readFileRegresi(path);
+                    }
                     input = RegresiLinear.prosesRegresi(input, input.length, input[0].length);
                     double[][] result = RegresiLinear.multiRegresi(input, input.length);
 
