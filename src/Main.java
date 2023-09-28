@@ -183,12 +183,12 @@ public class Main {
                     String path = myPath.nextLine();
                     double[][] om = ReadFile.readFileBicubicInterpolasi(path);
                     // for(int i = 0; i < 17; i++){
-                    //     for(int j = 0; j < 17; j++){
-                    //         System.out.print(om[i][j] + " ");
-                    //     }
-                    //     System.out.println();
+                    // for(int j = 0; j < 17; j++){
+                    // System.out.print(om[i][j] + " ");
                     // }
-                    
+                    // System.out.println();
+                    // }
+
                     double[][] kodok = ReadFile.readFileBicubicInterpolasi(path);
                     double[][] hasile = new double[16][16];
                     for (int i = 0; i < 16; i++) {
@@ -199,10 +199,10 @@ public class Main {
                         }
                         // System.out.println();
                     }
-                    
+
                     // iki y
                     double[][] y = new double[16][1];
-                    for (int i= 0; i < 16; i++) {
+                    for (int i = 0; i < 16; i++) {
                         y[i][0] = om[i][16];
                     }
                     // iki a
@@ -210,11 +210,11 @@ public class Main {
                     // iki b
                     double b = om[16][1];
 
-                    hasile = Bicubic.BicubicMase(hasile,y);
+                    hasile = Bicubic.BicubicMase(hasile, y);
                     // // for (int i = 0; i<16; i++) {
-                        
-                    // //         System.out.println(hasile[i][0] + " ");
-                        
+
+                    // // System.out.println(hasile[i][0] + " ");
+
                     // // }
 
                     System.out.println("hasilnya " + Bicubic.sangarOgXYneKetemu(hasile, a, b));
@@ -223,17 +223,24 @@ public class Main {
                 methodInput();
                 int inputChoice = objScan.nextInt();
                 if (inputChoice == 1) {
-                    // int n = objScan.nextInt();
-                    // int c = objScan.nextInt();
-                    // Matriks m = new Matriks(n, n + 1);
-                    // m.readFromCli(n, c);
-                    // RegresiLinear.multiRegresi(m.getMatriks(), n);
+                    double[][] input = RegresiLinear.readRegresiFromCli();
+                    input = RegresiLinear.prosesRegresi(input, input.length, input[0].length);
+                    double[][] result = RegresiLinear.multiRegresi(input, input.length);
+
+                    System.out.println("Masukkan titik yang ingin di tes ");
+
+                    RegresiLinear.ujiRegresi(result, result.length);
                 } else if (inputChoice == 2) {
                     Scanner myPath = new Scanner(System.in);
                     System.out.println("Input your file path : ");
                     String path = myPath.nextLine();
-                    double[][] input = ReadFile.readFileRegresi(path);
-                    RegresiLinear.multiRegresi(input, input.length);
+                    double[][] input = RegresiLinear.readFileRegresi(path);
+                    input = RegresiLinear.prosesRegresi(input, input.length, input[0].length);
+                    double[][] result = RegresiLinear.multiRegresi(input, input.length);
+
+                    System.out.println("Masukkan titik yang ingin di tes ");
+
+                    RegresiLinear.ujiRegresi(result, result.length);
                 }
             } else if (choice == 7) {
                 System.out.println("makasih cok");
