@@ -61,27 +61,6 @@ public class Main {
                 inputMethod();
                 int inputChoice = scan.nextInt();
                 utilities.MatriksBalikan.mainProses(subChoice, inputChoice);
-                // subMenu2();
-                // int subChoice = scan.nextInt();
-                // if (subChoice == 1) {
-                // inputMethod();
-                // int inputChoice = scan.nextInt();
-                // if (inputChoice == 1) {
-
-                // }
-                // if (inputChoice == 2) {
-
-                // }
-                // } else if (subChoice == 2) {
-                // inputMethod();
-                // int inputChoice = scan.nextInt();
-                // if (inputChoice == 1) {
-
-                // }
-                // if (inputChoice == 2) {
-
-                // }
-                // }
             } else if (choice == 4) {
                 inputMethod();
                 int inputChoice = scan.nextInt();
@@ -89,12 +68,7 @@ public class Main {
             } else if (choice == 5) {
                 inputMethod();
                 int inputChoice = scan.nextInt();
-                if (inputChoice == 1) {
-
-                }
-                if (inputChoice == 2) {
-
-                }
+                utilities.Bikubik.mainProses(inputChoice);
             } else if (choice == 6) {
                 inputMethod();
                 int inputChoice = scan.nextInt();
@@ -103,7 +77,6 @@ public class Main {
                 process = false;
                 System.out.println("Terima kasih sudah menggunakan");
             }
-
         }
     }
 }

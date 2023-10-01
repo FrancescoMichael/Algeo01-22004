@@ -50,26 +50,26 @@ public class Bicubic {
         Matriks m = new Matriks(16,16);
         int xxx = 0;
 
-        double suku= 0;
+        double suku1 = 0, suku2 = 0;
 
                 for(int j = 0; j < 4; j++){
                     for(int i = 0; i < 4; i++){
-                        if(a == 0 && (i+j) == 0){
-                            suku = 1;
+                        // if(a == 0 && (i+j) == 0){
+                        //     suku = 1;
+                        // }else{
+                        //     suku = Math.pow(a, i+j);
+                        // }
+                        if(a == 0 && (i) <= 0){
+                            suku1 = 1;
                         }else{
-                            suku = Math.pow(a, i+j);
+                            suku1 = Math.pow(a, i);
                         }
-                        // if(a == 0 && (i) <= 0){
-                        //     suku1 = 1;
-                        // }else{
-                        //     suku1 = Math.pow(a, i);
-                        // }
                             
-                        // if(b == 0 && (j) <= 0){
-                        //     suku2 = 1;
-                        // }else{
-                        //     suku2 = Math.pow(b, j);
-                        // }
+                        if(b == 0 && (j) <= 0){
+                            suku2 = 1;
+                        }else{
+                            suku2 = Math.pow(b, j);
+                        }
                     
                         dadine+=(suku*wongpusat[xxx][0]);
                         xxx++;
