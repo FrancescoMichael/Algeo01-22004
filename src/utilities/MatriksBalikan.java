@@ -345,6 +345,14 @@ public class MatriksBalikan {
             return;
         }
 
+        // cek apakah punya inverse atau tidak
+        // tidak punya inverse ssat determinan = 0
+        if(getDeterminanEksKof(matrix, n) == 0){
+            System.out.println("Matriks tidak memiliki balikan.");
+            System.out.println();
+            return;
+        }
+
         // lanjut proses matrix
         if (menu == 1) {
             System.out.println("Menggunakan Metode obe");
