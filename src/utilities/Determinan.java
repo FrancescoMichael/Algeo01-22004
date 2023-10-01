@@ -198,6 +198,20 @@ public class Determinan {
         }
     }
 
+    public static String doubleArrayToString(double[][] data) {
+        StringBuilder str = new StringBuilder();
+        for (int h = 0; h < data.length; h++) {
+            for (int i = 0; i < data[h].length; i++) {
+                str.append(data[h][i]);
+                if (i < data[h].length - 1) {
+                    str.append(" ");
+                }
+            }
+            str.append("\n");
+        }
+        return str.toString();
+    }
+
     public static void mainProses(int menu, int methodInput) {
         double[][] matrix = new double[0][0];
         int n, m;
@@ -237,14 +251,44 @@ public class Determinan {
 
         // lanjut proses matrix
         if (menu == 1) {
-            System.out.println("Menggunakan Metode Gauss");
+            StringBuilder str = new StringBuilder();
+            String dataPrint = doubleArrayToString(matrix);
+            System.out.println("Menggunakan Metode Ekspansi kofaktor");
             double res = getDeterminanEksKof(matrix, n);
             System.out.println("hasilnya adalah " + res);
+            str.append(dataPrint);
+            str.append("determinan matriks dengan menggunakan ekspansi kofaktor adalah " + res);
+
+            // print data
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(str.toString(), path);
+            }
 
         } else if (menu == 2) {
-            System.out.println("Menggunakan Metode Balikan");
+            StringBuilder str = new StringBuilder();
+            String dataPrint = doubleArrayToString(matrix);
+            System.out.println("Menggunakan Metode OBE");
             double res = getDeteminantOBE(matrix, n, n);
             System.out.println("hasilnya adalah " + res);
+            str.append(dataPrint);
+            str.append("determinan matriks dengan menggunakan OBE adalah " + res);
+
+            // print data
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(str.toString(), path);
+            }
 
         } else {
             System.out.println("kembali ke menu utamaa");

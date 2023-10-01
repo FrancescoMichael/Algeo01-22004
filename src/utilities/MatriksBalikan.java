@@ -203,6 +203,20 @@ public class MatriksBalikan {
         }
     }
 
+    public static String doubleArrayToString(double[][] data) {
+        StringBuilder str = new StringBuilder();
+        for (int h = 0; h < data.length; h++) {
+            for (int i = 0; i < data[h].length; i++) {
+                str.append(data[h][i]);
+                if (i < data[h].length - 1) {
+                    str.append(" ");
+                }
+            }
+            str.append("\n");
+        }
+        return str.toString();
+    }
+
     public static void mainProses(int menu, int methodInput) {
         double[][] matrix = new double[0][0];
         int n, m;
@@ -243,7 +257,22 @@ public class MatriksBalikan {
         if (menu == 1) {
             System.out.println("Menggunakan Metode obe");
             matrix = inverseMatrixOBE(matrix, n);
+            String dataPrint = doubleArrayToString(matrix);
             displayAugmentedMatrix(matrix, n, n);
+            StringBuilder str = new StringBuilder();
+            str.append("hasil inversenya adalah\n");
+            str.append(dataPrint);
+
+            // print data
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(str.toString(), path);
+            }
 
         } else if (menu == 2) {
             System.out.println("Menggunakan Metode adjoin");

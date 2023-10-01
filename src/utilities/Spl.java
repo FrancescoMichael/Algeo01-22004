@@ -21,12 +21,14 @@ public class Spl {
         return ans;
     }
 
-    public static void printSolusi(double[][] mat, int n, int m) {
+    public static String printSolusi(String data, double[][] mat, int n, int m) {
         // matriks mat berukuran n x m;
         // 3 kasus :
         // 1. No solution : baris terakhir 0 semua kecuali mat[n][m]
         // 2. Single solution : baris terakhir tersisa 1 utama
         // 3. Parametric solution : baris terakhir 0 semua
+        StringBuilder str = new StringBuilder();
+        str.append(data);
 
         double[] sol = new double[m - 1]; // menyimpan solusi
         boolean[] valSol = new boolean[m - 1]; // apakah valuenya ada atau belum
@@ -48,9 +50,11 @@ public class Spl {
         // No solution
         if (solCheck(mat, n, m) && mat[n - 1][m - 1] != 0) {
             // Kasus 1
+            str.append("Tidak ada solusi\n");
             System.out.println("Tidak ada solusi.");
         } else if (solCheck(mat, n, m) && mat[n - 1][m - 1] == 0) {
             // Kasus 3
+            str.append("maka solusi dari spl nya adalah\n");
             System.out.println("Solusi yang diberikan berada dalam bentuk parametrik.");
 
             int indParam = 0; // menggunakan huruf p terlebih dahulu
@@ -87,7 +91,6 @@ public class Spl {
                 // sol[oneLeading] = mat[i][m-1];
                 // valSol[oneLeading] = true;
                 strSol[oneLeading] = String.valueOf(mat[i][m - 1]);
-                ;
 
                 j = oneLeading + 1;
                 while (j < m - 1) {
@@ -118,11 +121,16 @@ public class Spl {
                 }
             }
             for (int i = 0; i < m - 1; i++) {
+                String x = "x" + Integer.toString(i + 1) + " = ";
+                str.append(x);
+                str.append(strSol[i]);
+                str.append("\n");
                 System.out.print(strSol[i]);
                 System.out.print(" ");
             }
         } else {
             // Kasus 2
+            str.append("maka solusi dari spl nya adalah\n");
             for (int i = n - 1; i >= 0; i--) {
                 int j = 0, oneLeading = -1;
                 // mencari 1 utama
@@ -140,10 +148,15 @@ public class Spl {
                 sol[oneLeading] = mat[i][m - 1];
             }
             for (int i = 0; i < m - 1; i++) {
+                String x = "x" + Integer.toString(i + 1) + " = ";
+                str.append(x);
+                str.append(sol[i]);
+                str.append("\n");
                 System.out.print(sol[i]);
                 System.out.print(" ");
             }
         }
+        return str.toString();
     }
 
     public static double[] add2Row(double[] matrix, double[] mtrx, int col) {
@@ -472,6 +485,20 @@ public class Spl {
 
     }
 
+    public static String doubleArrayToString(double[][] data) {
+        StringBuilder str = new StringBuilder();
+        for (int h = 0; h < data.length; h++) {
+            for (int i = 0; i < data[h].length; i++) {
+                str.append(data[h][i]);
+                if (i < data[h].length - 1) {
+                    str.append(" ");
+                }
+            }
+            str.append("\n");
+        }
+        return str.toString();
+    }
+
     public static void mainProses(int menu, int methodInput) {
         double[][] matrix = new double[0][0];
         int n, m;
@@ -514,15 +541,37 @@ public class Spl {
             System.out.println("Menggunakan Metode Gauss");
             matrix = getRowEchelon(matrix, n, m);
             displayAugmentedMatrix(matrix, n, m);
-            printSolusi(matrix, n, m);
+            String dataPrint = doubleArrayToString(matrix);
+            dataPrint = printSolusi(dataPrint, matrix, n, m);
+
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(dataPrint, path);
+            }
 
         } else if (menu == 2) {
             System.out.println("Menggunakan Metode Gauss-Jordan");
             matrix = getReductionRowEchelon(matrix, n, m);
-            displayAugmentedMatrix(matrix, n, m);
-            printSolusi(matrix, n, m);
+            String dataPrint = doubleArrayToString(matrix);
+            dataPrint = printSolusi(dataPrint, matrix, n, m);
+
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(dataPrint, path);
+            }
 
         } else if (menu == 3) {
+            String dataPrint = doubleArrayToString(matrix);
             System.out.println("Menggunakan Metode Matriks Balikan");
             double[][] value = new double[n][1];
             for (int i = 0; i < n; i++) {
@@ -530,15 +579,54 @@ public class Spl {
             }
             matrix = inverseMatrixOBE(matrix, n);
             matrix = multiplyMatrix(matrix, value);
-            displayAugmentedMatrix(matrix, n, 1);
+            StringBuilder str = new StringBuilder();
+            str.append(dataPrint);
+            str.append("maka solusi dari spl nya adalah\n");
+            for (int i = 0; i < n; i++) {
+                String temp = "x" + Integer.toString(i + 1) + " = " + Double.toString(matrix[i][0]) + "\n";
+                System.out.print(temp);
+                str.append(temp);
+            }
+
+            // print data
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(str.toString(), path);
+            }
 
         } else if (menu == 4) {
             if (n != m - 1) {
                 System.out.println("Tidak Bisa Menggunakan Metode Cramer");
             } else {
+                String dataPrint = doubleArrayToString(matrix);
                 System.out.println("Menggunakan Metode Cramer");
                 matrix = cramerMethod(matrix, n);
                 displayAugmentedMatrix(matrix, n, 1);
+                StringBuilder str = new StringBuilder();
+
+                str.append(dataPrint);
+                str.append("maka solusi dari spl nya adalah\n");
+                for (int i = 0; i < n; i++) {
+                    String temp = "x" + Integer.toString(i + 1) + " = " + Double.toString(matrix[i][0]) + "\n";
+                    System.out.print(temp);
+                    str.append(temp);
+                }
+
+                // print data
+                System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+                int p = scan.nextInt();
+
+                if (p == 1) {
+                    Scanner scanString = new Scanner(System.in);
+                    System.out.println("masukkan nama file .txt");
+                    String path = scanString.nextLine();
+                    FileDitulis.Codot(str.toString(), path);
+                }
             }
 
         } else {
