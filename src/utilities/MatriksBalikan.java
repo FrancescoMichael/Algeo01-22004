@@ -120,6 +120,95 @@ public class MatriksBalikan {
         return matrix;
     }
 
+    public static double getDeterminanEksKof(double[][] m, int n) {
+        // untuk matrix n*n cari determinan dengan ekspansi kofaktor
+        double res;
+        res = 0.0;
+        if (n == 2) {
+            return (m[0][0] * m[1][1] - m[1][0] * m[0][1]);
+        } else {
+            for (int ii = 0; ii < n; ii++) {
+                int x = 0;
+                double temp[][] = new double[n - 1][n - 1];
+                for (int i = 1; i < n; i++) {
+                    int y = 0;
+                    for (int j = 0; j < n; j++) {
+                        if (j != ii) {
+                            temp[x][y] = m[i][j];
+                            y++;
+                        }
+                    }
+                    x++;
+                }
+                res += (double) (((ii % 2 == 0) ? 1.0 : -1.0) * (m[0][ii]) * getDeterminanEksKof(temp, n - 1));
+            }
+        }
+        return res;
+    }
+
+    public static double[][] getCofac(double[][] cofac, int n, int fRow, int fCol){
+        double[][] ans = new double[n-1][n-1];
+
+        // int i = 0, isi_row = 0;
+        // for( ; i < ROW_EFF(m); i++){
+        //     int j = 0, isi_col = 0;
+        //     for( ; j < COL_EFF(m); j++){
+        //         if(i != fRow && j != fCol){
+        //             ELMT(hasil, isi_row, isi_col) = ELMT(m, i, j);
+        //             isi_col++;
+        //         }
+        //     }
+        //     if(i != fRow){
+        //         isi_row++;
+        //     }
+        // }
+        
+        int isi_row = 0;
+        for(int i = 0; i < n; i++){
+            int isi_col = 0;
+            for(int j = 0; j < n; j++){
+                if(i != fRow && j!= fCol){
+                    ans[isi_row][isi_col] = cofac[i][j];
+                    isi_col++;
+                }
+            }
+            if(i != fRow){
+                isi_row++;
+            }
+        }
+
+        return ans;
+    }
+
+    public static double[][] transpose(double[][] mat, int n){
+        double[][] ans = new double[n][n];
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                ans[i][j] = mat[j][i];
+            }
+        }
+
+        return ans;
+    }
+
+    public static double[][] inverseAdjoint(double[][] matriks, int n){
+        double[][] ans = new double[n][n];
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                // ambil matriks kofaktor
+                double[][] cofac = new double[n-1][n-1];
+                cofac = getCofac(cofac, n, i, j);
+                ans[i][j] = getDeterminanEksKof(cofac, n-1)/getDeterminanEksKof(matriks, n);
+            }
+        }
+
+        ans = transpose(ans, n);
+
+        return ans;
+    }
+
     public static double[][] inverseMatrixOBE(double[][] matriks, int n) {
         double[][] temp = new double[n][n * 2];
         double[][] mIdentitas = new double[n][n];
@@ -276,7 +365,7 @@ public class MatriksBalikan {
 
         } else if (menu == 2) {
             System.out.println("Menggunakan Metode adjoin");
-
+            matrix = inverseAdjoint(matrix, n);
         } else {
             System.out.println("kembali ke menu utamaa");
             return;

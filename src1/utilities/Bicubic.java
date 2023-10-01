@@ -47,18 +47,12 @@ public class Bicubic {
 
     public static double sangarOgXYneKetemu(double[][] wongpusat, double a, double b) {
         double dadine = 0;
-        Matriks m = new Matriks(16,16);
         int xxx = 0;
 
         double suku1 = 0, suku2 = 0;
 
                 for(int j = 0; j < 4; j++){
                     for(int i = 0; i < 4; i++){
-                        // if(a == 0 && (i+j) == 0){
-                        //     suku = 1;
-                        // }else{
-                        //     suku = Math.pow(a, i+j);
-                        // }
                         if(a == 0 && (i) <= 0){
                             suku1 = 1;
                         }else{
@@ -79,11 +73,4 @@ public class Bicubic {
         return dadine;
 
     }    
-
-    // asumsikan input valid
-    // public static void Bicubic(double [][] y, double [][] X, int n, int o){ 
-    //     Matriks m = new Matriks(n,o);
-    // }
-
-    // }
 }
