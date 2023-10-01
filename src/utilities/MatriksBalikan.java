@@ -199,8 +199,11 @@ public class MatriksBalikan {
             for(int j = 0; j < n; j++){
                 // ambil matriks kofaktor
                 double[][] cofac = new double[n-1][n-1];
-                cofac = getCofac(cofac, n, i, j);
+                cofac = getCofac(matriks, n, i, j);
                 ans[i][j] = getDeterminanEksKof(cofac, n-1)/getDeterminanEksKof(matriks, n);
+                if((i+j)%2 == 1){
+                    ans[i][j] *= (-1);
+                }
             }
         }
 
@@ -366,6 +369,22 @@ public class MatriksBalikan {
         } else if (menu == 2) {
             System.out.println("Menggunakan Metode adjoin");
             matrix = inverseAdjoint(matrix, n);
+            String dataPrint = doubleArrayToString(matrix);
+            displayAugmentedMatrix(matrix, n, n);
+            StringBuilder str = new StringBuilder();
+            str.append("hasil inversenya adalah\n");
+            str.append(dataPrint);
+
+            // print data
+            System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+            int p = scan.nextInt();
+
+            if (p == 1) {
+                Scanner scanString = new Scanner(System.in);
+                System.out.println("masukkan nama file .txt");
+                String path = scanString.nextLine();
+                FileDitulis.Codot(str.toString(), path);
+            }
         } else {
             System.out.println("kembali ke menu utamaa");
             return;
