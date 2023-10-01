@@ -258,17 +258,22 @@ public class RegresiBerganda {
         return ans;
     }
 
-    public static void ujiRegresi(double[][] b, double[] test, int n) {
+    public static String ujiRegresi(double[][] b, double[] test, int n) {
+        StringBuilder str = new StringBuilder();
 
-        System.out.print("y = ");
+        System.out.print("f(x) = ");
+        str.append("f(x) = ");
         for (int i = 0; i < n; i++) {
             if (i == 0) {
                 System.out.print(b[i][0] + " ");
+                str.append(b[i][0] + " ");
             } else {
-                if (b[i][0] > 0)
+                if (b[i][0] > 0) {
                     System.out.print("+" + b[i][0] + "x" + i + " ");
-                else if (b[i][0] < 0) {
+                    str.append("+" + b[i][0] + "x" + i + " ");
+                } else if (b[i][0] < 0) {
                     System.out.print(b[i][0] + "x" + i + " ");
+                    str.append(b[i][0] + "x" + i + " ");
                 }
 
             }
@@ -283,7 +288,9 @@ public class RegresiBerganda {
                 res += (test[i - 1] * b[i][0]);
             }
         }
-        System.out.println("maka hasilnya pada test case di atas adalah " + res);
+        System.out.println("\nmaka hasilnya pada test case di atas adalah " + res);
+        str.append("\nmaka hasilnya pada test case di atas adalah " + res);
+        return str.toString();
 
     }
 
@@ -394,8 +401,19 @@ public class RegresiBerganda {
         // mulai proses
         matrix = prosesRegresi(matrix, n, m);
         matrix = multiRegresi(matrix, matrix.length);
-        displayAugmentedMatrix(matrix, matrix.length, matrix[0].length);
-        ujiRegresi(matrix, uji, matrix.length);
+        // displayAugmentedMatrix(matrix, matrix.length, matrix[0].length);
+        String str = ujiRegresi(matrix, uji, matrix.length);
+
+        // print data
+        System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+        int p = scan.nextInt();
+
+        if (p == 1) {
+            Scanner scanString = new Scanner(System.in);
+            System.out.println("masukkan nama file .txt");
+            String path = scanString.nextLine();
+            FileDitulis.Codot(str, path);
+        }
     }
 
 }

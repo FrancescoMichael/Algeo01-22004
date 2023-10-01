@@ -25,8 +25,15 @@ public class Main {
 
     public static void subMenu2() {
         System.out.println("MENU\r\n" + //
-                "1. Metode eliminasi Gauss\r\n" + //
-                "2. Metode matriks balikan\n" +
+                "1. Metode eliminasi Ekspansi Kofaktor\r\n" + //
+                "2. Metode matriks OBE\n" +
+                "Lainnya untuk kembali ke menu utama");
+    }
+
+    public static void subMenu3() {
+        System.out.println("MENU\r\n" + //
+                "1. Metode eliminasi OBE\r\n" + //
+                "2. Metode matriks ADJOINT\n" +
                 "Lainnya untuk kembali ke menu utama");
     }
 
@@ -56,7 +63,7 @@ public class Main {
                 int inputChoice = scan.nextInt();
                 utilities.Determinan.mainProses(subChoice, inputChoice);
             } else if (choice == 3) {
-                subMenu2();
+                subMenu3();
                 int subChoice = scan.nextInt();
                 inputMethod();
                 int inputChoice = scan.nextInt();

@@ -5,162 +5,122 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Bikubik {
-    public static double[][] getMatX(){
+    public static double[][] getMatX() {
         double[][] X = new double[16][16];
         double xX = 0, yX = 0;
 
         // f
-            int indRow = 0;
-            for (; indRow < 4; indRow++) {
-                if (indRow % 4 == 0) {
-                    xX = 0;
-                    yX = 0;
-                } else if (indRow % 4 == 1) {
-                    xX = 1;
-                    yX = 0;
-                } else if (indRow % 4 == 2) {
-                    xX = 0;
-                    yX = 1;
-                } else {
-                    xX = 1;
-                    yX = 1;
+        int indRow = 0;
+        for (; indRow < 4; indRow++) {
+            if (indRow % 4 == 0) {
+                xX = 0;
+                yX = 0;
+            } else if (indRow % 4 == 1) {
+                xX = 1;
+                yX = 0;
+            } else if (indRow % 4 == 2) {
+                xX = 0;
+                yX = 1;
+            } else {
+                xX = 1;
+                yX = 1;
+            }
+            double suku1 = 0, suku2 = 0;
+
+            int indCol = 0;
+            for (int i = 0; i <= 3; i++) {
+                for (int j = 0; j <= 3; j++) {
+                    if (xX == 0 && j == 0) {
+                        suku1 = 1;
+                    } else {
+                        suku1 = Math.pow(xX, j);
+                    }
+
+                    if (yX == 0 && i == 0) {
+                        suku2 = 1;
+                    } else {
+                        suku2 = Math.pow(yX, i);
+                    }
+
+                    X[indRow][indCol] = suku1 * suku2;
+                    indCol++;
                 }
-                double suku1 = 0, suku2 = 0;
+            }
+        }
 
-                int indCol = 0;
-                for (int i = 0; i <= 3; i++) {
-                    for (int j = 0; j <= 3; j++) {
-                        if (xX == 0 && j == 0) {
-                            suku1 = 1;
-                        } else {
-                            suku1 = Math.pow(xX, j);
-                        }
+        // fx
+        for (; indRow < 8; indRow++) {
+            if (indRow % 4 == 0) {
+                xX = 0;
+                yX = 0;
+            } else if (indRow % 4 == 1) {
+                xX = 1;
+                yX = 0;
+            } else if (indRow % 4 == 2) {
+                xX = 0;
+                yX = 1;
+            } else {
+                xX = 1;
+                yX = 1;
+            }
 
-                        if (yX == 0 && i == 0) {
-                            suku2 = 1;
-                        } else {
-                            suku2 = Math.pow(yX, i);
-                        }
+            double suku1 = 0, suku2 = 0;
 
-                        X[indRow][indCol] = suku1 * suku2;
+            int indCol = 0;
+            for (int j = 0; j < 4; j++) {
+                for (int i = 0; i < 4; i++) {
+                    if (i == 0) {
+                        X[indRow][indCol] = 0;
                         indCol++;
-                    }
-                }
-            }
-
-            // fx
-            for (; indRow < 8; indRow++) {
-                if (indRow % 4 == 0) {
-                    xX = 0;
-                    yX = 0;
-                } else if (indRow % 4 == 1) {
-                    xX = 1;
-                    yX = 0;
-                } else if (indRow % 4 == 2) {
-                    xX = 0;
-                    yX = 1;
-                } else {
-                    xX = 1;
-                    yX = 1;
-                }
-
-                double suku1 = 0, suku2 = 0;
-
-                int indCol = 0;
-                for (int j = 0; j < 4; j++) {
-                    for (int i = 0; i < 4; i++) {
-                        if (i == 0) {
-                            X[indRow][indCol] = 0;
-                            indCol++;
-                        } else {
-                            if (xX == 0 && (i - 1) <= 0) {
-                                suku1 = 1;
-                            } else {
-                                suku1 = Math.pow(xX, i - 1);
-                            }
-
-                            if (yX == 0 && j <= 0) {
-                                suku2 = 1;
-                            } else {
-                                suku2 = Math.pow(yX, j);
-                            }
-
-                            X[indRow][indCol] = i * suku1 * suku2;
-                            indCol++;
-                        }
-                    }
-                }
-            }
-
-            // fx
-            for (; indRow < 12; indRow++) {
-                if (indRow % 4 == 0) {
-                    xX = 0;
-                    yX = 0;
-                } else if (indRow % 4 == 1) {
-                    xX = 1;
-                    yX = 0;
-                } else if (indRow % 4 == 2) {
-                    xX = 0;
-                    yX = 1;
-                } else {
-                    xX = 1;
-                    yX = 1;
-                }
-
-                double suku1 = 0, suku2 = 0;
-
-                int indCol = 0;
-                for (int j = 0; j < 4; j++) {
-                    for (int i = 0; i < 4; i++) {
-                        if (j == 0) {
-                            X[indRow][indCol] = 0;
-                            indCol++;
-                        } else {
-                            if (xX == 0 && i <= 0) {
-                                suku1 = 1;
-                            } else {
-                                suku1 = Math.pow(xX, i);
-                            }
-
-                            if (yX == 0 && (j - 1) <= 0) {
-                                suku2 = 1;
-                            } else {
-                                suku2 = Math.pow(yX, j - 1);
-                            }
-
-                            X[indRow][indCol] = j * suku1 * suku2;
-                            indCol++;
-                        }
-                    }
-                }
-            }
-
-            // fxy
-            for (; indRow < 16; indRow++) {
-                if (indRow % 4 == 0) {
-                    xX = 0;
-                    yX = 0;
-                } else if (indRow % 4 == 1) {
-                    xX = 1;
-                    yX = 0;
-                } else if (indRow % 4 == 2) {
-                    xX = 0;
-                    yX = 1;
-                } else {
-                    xX = 1;
-                    yX = 1;
-                }
-
-                double suku1 = 0, suku2 = 0;
-
-                int indCol = 0;
-                for (int j = 0; j < 4; j++) {
-                    for (int i = 0; i < 4; i++) {
+                    } else {
                         if (xX == 0 && (i - 1) <= 0) {
                             suku1 = 1;
                         } else {
                             suku1 = Math.pow(xX, i - 1);
+                        }
+
+                        if (yX == 0 && j <= 0) {
+                            suku2 = 1;
+                        } else {
+                            suku2 = Math.pow(yX, j);
+                        }
+
+                        X[indRow][indCol] = i * suku1 * suku2;
+                        indCol++;
+                    }
+                }
+            }
+        }
+
+        // fx
+        for (; indRow < 12; indRow++) {
+            if (indRow % 4 == 0) {
+                xX = 0;
+                yX = 0;
+            } else if (indRow % 4 == 1) {
+                xX = 1;
+                yX = 0;
+            } else if (indRow % 4 == 2) {
+                xX = 0;
+                yX = 1;
+            } else {
+                xX = 1;
+                yX = 1;
+            }
+
+            double suku1 = 0, suku2 = 0;
+
+            int indCol = 0;
+            for (int j = 0; j < 4; j++) {
+                for (int i = 0; i < 4; i++) {
+                    if (j == 0) {
+                        X[indRow][indCol] = 0;
+                        indCol++;
+                    } else {
+                        if (xX == 0 && i <= 0) {
+                            suku1 = 1;
+                        } else {
+                            suku1 = Math.pow(xX, i);
                         }
 
                         if (yX == 0 && (j - 1) <= 0) {
@@ -169,12 +129,52 @@ public class Bikubik {
                             suku2 = Math.pow(yX, j - 1);
                         }
 
-                        X[indRow][indCol] = i * j * suku1 * suku2;
+                        X[indRow][indCol] = j * suku1 * suku2;
                         indCol++;
                     }
                 }
             }
-        return X;    
+        }
+
+        // fxy
+        for (; indRow < 16; indRow++) {
+            if (indRow % 4 == 0) {
+                xX = 0;
+                yX = 0;
+            } else if (indRow % 4 == 1) {
+                xX = 1;
+                yX = 0;
+            } else if (indRow % 4 == 2) {
+                xX = 0;
+                yX = 1;
+            } else {
+                xX = 1;
+                yX = 1;
+            }
+
+            double suku1 = 0, suku2 = 0;
+
+            int indCol = 0;
+            for (int j = 0; j < 4; j++) {
+                for (int i = 0; i < 4; i++) {
+                    if (xX == 0 && (i - 1) <= 0) {
+                        suku1 = 1;
+                    } else {
+                        suku1 = Math.pow(xX, i - 1);
+                    }
+
+                    if (yX == 0 && (j - 1) <= 0) {
+                        suku2 = 1;
+                    } else {
+                        suku2 = Math.pow(yX, j - 1);
+                    }
+
+                    X[indRow][indCol] = i * j * suku1 * suku2;
+                    indCol++;
+                }
+            }
+        }
+        return X;
     }
 
     public static double[][] multiplyMatrix(double[][] a, double[][] b) {
@@ -324,27 +324,27 @@ public class Bikubik {
         return matriks;
     }
 
-    public static double getSolution(double[][] A, double a, double b){
+    public static double getSolution(double[][] A, double a, double b) {
         double ans = 0;
         int ind_a = 0;
 
         double suku1 = 0, suku2 = 0;
 
-        for(int j = 0; j < 4; j++){
-            for(int i = 0; i < 4; i++){
-                if(a == 0 && (i) <= 0){
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < 4; i++) {
+                if (a == 0 && (i) <= 0) {
                     suku1 = 1;
-                }else{
+                } else {
                     suku1 = Math.pow(a, i);
                 }
-                    
-                if(b == 0 && (j) <= 0){
+
+                if (b == 0 && (j) <= 0) {
                     suku2 = 1;
-                }else{
+                } else {
                     suku2 = Math.pow(b, j);
                 }
-            
-                ans+=(suku1*suku2*A[ind_a][0]);
+
+                ans += (suku1 * suku2 * A[ind_a][0]);
                 ind_a++;
             }
         }
@@ -352,7 +352,7 @@ public class Bikubik {
         return ans;
     }
 
-    public static double[][] getSolA(double[][] y, double[][] X){
+    public static double[][] getSolA(double[][] y, double[][] X) {
         // mendapatkan matriks A
         // A = inv(X)*y
 
@@ -383,7 +383,7 @@ public class Bikubik {
         return ans;
     }
 
-    public static double[][] readFile(String fileName){
+    public static double[][] readFile(String fileName) {
         try {
             String[] tempData;
             tempData = new String[1000];
@@ -441,14 +441,14 @@ public class Bikubik {
             y[17][0] = b;
 
             return y;
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             double[][] a = new double[0][0];
             System.out.println("File tidak ditemukan.");
             return a;
         }
     }
 
-    public static void mainProses(int methodInput){
+    public static void mainProses(int methodInput) {
         // menggunakan bentuk y = XA
         // mencari A
         // X default
@@ -471,13 +471,13 @@ public class Bikubik {
         double a, b;
 
         // input matriks y dan variabel a dan b
-        if(methodInput == 1){
+        if (methodInput == 1) {
             // input dari cli
-            String[] fungsi = {"f", "fx", "fy", "fxy"};
-            String[] point = {"(0,0)", "(1,0)", "(0,1)", "(1,1)"};
-            for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    // contoh : Masukkan titik f(0,0) : 
+            String[] fungsi = { "f", "fx", "fy", "fxy" };
+            String[] point = { "(0,0)", "(1,0)", "(0,1)", "(1,1)" };
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    // contoh : Masukkan titik f(0,0) :
                     System.out.print("Masukkan titik " + fungsi[i] + point[j] + ": ");
                     y[ind_y][0] = scan.nextDouble();
                     ind_y++;
@@ -490,7 +490,7 @@ public class Bikubik {
             // input b
             System.out.print("Masukkan titik b : ");
             b = scan.nextDouble();
-        }else{
+        } else {
             // input dari file
             System.out.println("Masukkan nama file: ");
             String FileName = scan.nextLine();
@@ -500,12 +500,12 @@ public class Bikubik {
             double[][] mtrx = new double[18][1];
             mtrx = readFile(FileName);
 
-            if(matrix.length == 0){
+            if (matrix.length == 0) {
                 return;
             }
 
             // mendapatkan matriks y
-            for(int i = 0; i < 16; i++){
+            for (int i = 0; i < 16; i++) {
                 y[i][0] = mtrx[i][0];
             }
 
@@ -513,7 +513,7 @@ public class Bikubik {
             a = mtrx[16][0];
             b = mtrx[17][0];
         }
-        
+
         // sudah ada matrix X dan y
         // process start
 
@@ -526,6 +526,22 @@ public class Bikubik {
 
         // output
         System.out.print("Hasil dari ... adalah ");
-        System.out.print(result);
+        System.out.println(result);
+
+        StringBuilder str = new StringBuilder();
+        str.append("Hasil dari ... adalah ");
+        str.append(result);
+
+        // print data
+        System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+        int p = scan.nextInt();
+
+        if (p == 1) {
+            Scanner scanString = new Scanner(System.in);
+            System.out.println("masukkan nama file .txt");
+            String path = scanString.nextLine();
+            FileDitulis.Codot(str.toString(), path);
+        }
+
     }
 }

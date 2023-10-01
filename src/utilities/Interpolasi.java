@@ -283,6 +283,42 @@ public class Interpolasi {
         A = inverseMatrixOBE(A, n);
 
         matrix = multiplyMatrix(A, B);
-        displayAugmentedMatrix(matrix, n, 1);
+        double res = 0;
+
+        // displayAugmentedMatrix(matrix, n, 1);
+        System.out.print("f(x) = ");
+        StringBuilder str = new StringBuilder();
+        str.append("f(x) = ");
+        for (int i = 0; i < matrix.length; i++) {
+            if (i == 0) {
+                res += matrix[i][0];
+                System.out.print(matrix[i][0] + " ");
+                str.append(matrix[i][0] + " ");
+            } else {
+                res += (matrix[i][0] * Math.pow(target, i));
+                if (matrix[i][0] > 0) {
+                    System.out.print("+" + matrix[i][0] + "x^" + i + " ");
+                    str.append("+" + matrix[i][0] + "x^" + i + " ");
+                } else if (matrix[i][0] < 0) {
+                    System.out.print(matrix[i][0] + "x^" + i + " ");
+                    str.append(matrix[i][0] + "x^" + i + " ");
+                }
+
+            }
+        }
+        System.out.println("\nf(" + target + ")" + " = " + res);
+        str.append("\nf(" + target + ")" + " = " + res);
+
+        // print data
+        System.out.println("\nApakah hasil akhir mau di save ke file? (1 for yes, lainnya no)");
+        int p = scan.nextInt();
+
+        if (p == 1) {
+            Scanner scanString = new Scanner(System.in);
+            System.out.println("masukkan nama file .txt");
+            String path = scanString.nextLine();
+            FileDitulis.Codot(str.toString(), path);
+        }
+
     }
 }
