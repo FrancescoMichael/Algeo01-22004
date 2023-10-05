@@ -63,4 +63,4 @@ pada bagian ini terdapat 4 submenu
 
 
 ## 6. Regresi linier Berganda
-> menentukan hubungan antar beberapa variabel independen dengan suatu variabel dependen. Hubungan ini biasa dinyatakan dalam fungsi regresi. Fungsi ini mengambil data dari sampel yang ada untuk meningkatkan akurasi fungsi tersebut. Tujuan dari regresi linier berganda adalah memprediksi nilai variabel dependen berdasarkan nilai variabel independen yang diberikan.
+> Menentukan hubungan antar beberapa variabel independen dengan suatu variabel dependen. Hubungan ini biasa dinyatakan dalam fungsi regresi. Fungsi ini mengambil data dari sampel yang ada untuk meningkatkan akurasi fungsi tersebut. Tujuan dari regresi linier berganda adalah memprediksi nilai variabel dependen berdasarkan nilai variabel independen yang diberikan.
