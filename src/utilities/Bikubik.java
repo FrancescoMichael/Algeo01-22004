@@ -500,7 +500,7 @@ public class Bikubik {
             double[][] mtrx = new double[18][1];
             mtrx = readFile(FileName);
 
-            if (matrix.length == 0) {
+            if (mtrx.length == 0) {
                 return;
             }
 
@@ -514,11 +514,12 @@ public class Bikubik {
             b = mtrx[17][0];
         }
         // validasi matriks pasti 4 kali 4
-        if (matrix.length == 0) {
+        if (y.length == 0) {
             System.out.println("input tidak valid");
             return;
-        } else if (matrix.length == 4 && matrix[0].length == 4) {
-            System.out.println("input tidak valid");
+        } else if (!((y.length == 16 || y.length == 18) && y[0].length == 1)) {
+
+            System.out.println("input tidak valid" + y.length);
             return;
         }
         // sudah ada matrix X dan y
@@ -532,11 +533,11 @@ public class Bikubik {
         double result = getSolution(A, a, b);
 
         // output
-        System.out.print("Hasil dari ... adalah ");
+        System.out.print("Hasil dari f(" + a + "," + b + ") adalah ");
         System.out.println(result);
 
         StringBuilder str = new StringBuilder();
-        str.append("Hasil dari ... adalah ");
+        str.append("Hasil dari f(" + a + "," + b + ") adalah ");
         str.append(result);
 
         // print data
