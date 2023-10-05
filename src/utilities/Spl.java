@@ -31,7 +31,8 @@ public class Spl {
         str.append(data);
 
         double[] sol = new double[m - 1]; // menyimpan solusi
-        boolean[] valSol = new boolean[m - 1]; // apakah valuenya ada atau belum
+        boolean[] valSol = new boolean[m - 1]; // sudah ada solui atau belum
+        boolean[] solAngka = new boolean[m-1]; // solusi angka atau tidak
         String[] strSol = new String[m - 1]; // solusi dalam bentuk string
         String[] paramLetter = { "p", "q", "r", "s", "t", "u", "v", "w" };
 
@@ -77,11 +78,12 @@ public class Spl {
                             // cek apakah solusi parametrik sudah ada atau belum
                             if (strSol[j] == " ") {
                                 // belum ada solusi parametrik sama sekali
-                                strSol[j] = paramLetter[indParam];
+                                strSol[j] = "(";
+                                strSol[j] += paramLetter[indParam];
+                                strSol[j] += ")";
                                 indParam++;
                             } else {
                                 // sudah ada solusi
-
                             }
                         }
                     }
@@ -90,12 +92,22 @@ public class Spl {
 
                 // sol[oneLeading] = mat[i][m-1];
                 // valSol[oneLeading] = true;
-                strSol[oneLeading] = String.valueOf(mat[i][m - 1]);
+                if(mat[i][m-1] != 0){
+                    strSol[oneLeading] = "(";
+                    strSol[oneLeading] += String.valueOf(mat[i][m - 1]);
+                    strSol[oneLeading] += ")";
+                }else{
+                    strSol[oneLeading] = "0";
+                }
+                
 
-                j = oneLeading + 1;
-                while (j < m - 1) {
+                // j = oneLeading + 1;
+                // while (j < m - 1)
+                j = m-2;
+                while(j >= oneLeading + 1) 
+                {
                     if (mat[i][j] != 0) {
-                        if (strSol[j] == "0.0") {
+                        if (strSol[j] == "0") {
                             mat[i][j] = 0;
                         }
                         if (mat[i][j] > 0) {
@@ -117,7 +129,7 @@ public class Spl {
                             strSol[oneLeading] += ")";
                         }
                     }
-                    j++;
+                    j--;
                 }
             }
             for (int i = 0; i < m - 1; i++) {
@@ -125,7 +137,7 @@ public class Spl {
                 str.append(x);
                 str.append(strSol[i]);
                 str.append("\n");
-                System.out.print(strSol[i]);
+                System.out.print(x+ strSol[i] + "\n");
                 System.out.print(" ");
             }
         } else {
@@ -152,7 +164,7 @@ public class Spl {
                 str.append(x);
                 str.append(sol[i]);
                 str.append("\n");
-                System.out.print(sol[i]);
+                System.out.print(x + sol[i] + "\n");
                 System.out.print(" ");
             }
         }
