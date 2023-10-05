@@ -59,5 +59,8 @@ pada bagian ini terdapat 4 submenu
 > menghitung interpolasi pastikan input berbentuk matriks dan kemudian masukkan titik yang yang di taksir, jika input dalam file atasnya bentuk matriks kemudian dibawahnya ada 1 angka yang berisikan titik yang mau di taksir (sesuai spek) dan pastikan semua input dalam file ataupun cli berupa angka yang valid entak float maupun integer dan bukan merupakan charackter lainnya seperti huruf dll
 
 ## 5. Interpolasi Bicubic Spline
+> Interpolasi bicubic spline adalah teknik interpolasi yang digunakan untuk mengaproksiasi fungsi di antara titik-titik data yang diketahui. Dalam pemrosesannya, digunakan 16 buah titik, yang terdiri dari 4 titik referensi utama di bagian pusat dan 12 titik di sekitarnya. Hal ini bertujuan sebagai aproksimasi turunan dari keempat titik referensi untuk membagun permukaan bikubik.
+
 
 ## 6. Regresi linier Berganda
+> Menentukan hubungan antar beberapa variabel independen dengan suatu variabel dependen. Hubungan ini biasa dinyatakan dalam fungsi regresi. Fungsi ini mengambil data dari sampel yang ada untuk meningkatkan akurasi fungsi tersebut. Tujuan dari regresi linier berganda adalah memprediksi nilai variabel dependen berdasarkan nilai variabel independen yang diberikan.
