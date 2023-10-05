@@ -22,8 +22,12 @@ ketike anda menjalankannya anda akan memasuki menu utama dan ketik 0 untuk mengh
 
 ## cara input data dalam program
 
-> 1. (CLI)input dengan memasukkan jumlah baris dan kolom, pastikan memasukkan dalam bentuk angka bukan character lain.... kemudian masukkan matriks anda sesuai dengan ukuran yang anda pilih dalam angka float maupun integer bukan charachter lain.
-> 2. (FILE TXT) input dengan memanggil nama file, dan pastikan isi file hanya berisikan matriks dengan setiap elemen berupa angka bukan huruf maupun character lainnya.
+> 1. (CLI)input dengan memasukkan jumlah baris dan kolom, pastikan memasukkan dalam bentuk angka bukan character lain.... kemudian masukkan matriks anda sesuai dengan ukuran yang anda pilih dalam angka float maupun integer bukan charachter lain .
+> 2. (FILE TXT) input dengan memanggil nama file, dan pastikan isi file hanya berisikan matriks dengan setiap elemen berupa angka bukan huruf maupun character lainnya serta tidak ada enter maupun spasi pada setelah matriks.
+
+## cara simpan data ke file
+
+> masukkan nama file tujuan dengan .txtnya, jika sudah ada file yang sama maka akan di replace dan jika belum ada maka akan dibikin file baru maka hasiklnya akan terrulis di file test/output/... hal itu bisa dilakukan dengan memilih ngka 1 ketika ada pertanyaan apakah mau save dan ketik angka selain 1 (ANGKA bukan karakter lain) jika ingin skip.
 
 pada program ini terdapat 6 menu
 
