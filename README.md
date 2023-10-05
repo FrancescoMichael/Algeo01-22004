@@ -57,10 +57,15 @@ pada bagian ini terdapat 4 submenu
 ## 4. Interpolasi Polinom
 
 > menghitung interpolasi pastikan input berbentuk matriks dan kemudian masukkan titik yang yang di taksir, jika input dalam file atasnya bentuk matriks kemudian dibawahnya ada 1 angka yang berisikan titik yang mau di taksir (sesuai spek) dan pastikan semua input dalam file ataupun cli berupa angka yang valid entak float maupun integer dan bukan merupakan charackter lainnya seperti huruf dll
+>     > Untuk input dari cli, pastikan input valid yang terdiri dari titik-titik sampel dan nilai yang ingin ditafsir.
+>     > Untuk input dari file, pastikan input dari file berupa titik-titik sampel dan nilai yang ingin ditafsir. Untuk titik sampel, pisahkan tiap titik dengan new line. Untuk tiap titik, pisahkan x dan y dengan spasi.
 
 ## 5. Interpolasi Bicubic Spline
 > Interpolasi bicubic spline adalah teknik interpolasi yang digunakan untuk mengaproksiasi fungsi di antara titik-titik data yang diketahui. Dalam pemrosesannya, digunakan 16 buah titik, yang terdiri dari 4 titik referensi utama di bagian pusat dan 12 titik di sekitarnya. Hal ini bertujuan sebagai aproksimasi turunan dari keempat titik referensi untuk membagun permukaan bikubik.
-
+>     > Untuk input dari cli, pastikan input valid yang terdiri dari titik-titik sampel dan nilai yang ingin ditafsir.
+>     > Untuk input dari file, pastikan input dari file berupa titik-titik sampel dengan matriks ukuran 4x4 dan nilai yang ingin ditafsir di bawah mariks tersebut. Titik ini dipisahkan dengan spasi.
 
 ## 6. Regresi linier Berganda
 > Menentukan hubungan antar beberapa variabel independen dengan suatu variabel dependen. Hubungan ini biasa dinyatakan dalam fungsi regresi. Fungsi ini mengambil data dari sampel yang ada untuk meningkatkan akurasi fungsi tersebut. Tujuan dari regresi linier berganda adalah memprediksi nilai variabel dependen berdasarkan nilai variabel independen yang diberikan.
+>     > Untuk input dari cli, pastikan input valid yang terdiri dari titik-titik sampel dan nilai yang ingin ditafsir.
+>     > Untuk input dari file, pastikan input dari file berupa titik-titik sampel dan nilai yang ingin ditafsir. Untuk titik sampel, pisahkan tiap titik dengan new line. Untuk tiap titik, pisahkan x1, x2, ... dst dan y dengan spasi.
