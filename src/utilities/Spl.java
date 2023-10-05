@@ -7,15 +7,28 @@ import java.util.Scanner;
 public class Spl {
     public static boolean solCheck(double[][] mat, int n, int m) {
         // true jika tidak ada solusi, false jika ada solusi
-        boolean ans = true;
+        boolean ans = false;
 
         // cek baris terakhir
-        int i = 0;
-        while (i < m - 1 && ans) {
-            if (mat[n - 1][i] != 0) {
-                ans = false;
+        // int i = 0;
+        // while (i < m - 1 && ans) {
+        // if (mat[n - 1][i] != 0) {
+        // ans = false;
+        // }
+        // i++;
+        // }
+        for (int i = 0; i < n; i++) {
+            boolean temp = false;
+            for (int j = 0; j < m - 1; j++) {
+                if (mat[i][j] != 0) {
+                    temp = true;
+                }
             }
-            i++;
+            if (!temp) {
+                if (mat[i][m - 1] != 0) {
+                    ans = true;
+                }
+            }
         }
 
         return ans;
@@ -28,6 +41,7 @@ public class Spl {
         // 2. Single solution : baris terakhir tersisa 1 utama
         // 3. Parametric solution : baris terakhir 0 semua
         StringBuilder str = new StringBuilder();
+        displayAugmentedMatrix(mat, n, m);
         str.append(data);
 
         double[] sol = new double[m - 1]; // menyimpan solusi
@@ -48,11 +62,11 @@ public class Spl {
 
         // Kasus 1
         // No solution
-        if (solCheck(mat, n, m) && mat[n - 1][m - 1] != 0) {
+        if (solCheck(mat, n, m)) {
             // Kasus 1
             str.append("Tidak ada solusi\n");
             System.out.println("Tidak ada solusi.");
-        } else if (solCheck(mat, n, m) && mat[n - 1][m - 1] == 0) {
+        } else if (!solCheck(mat, n, m) && isRowZero(mat[n - 1], m)) {
             // Kasus 3
             str.append("maka solusi dari spl nya adalah\n");
             System.out.println("Solusi yang diberikan berada dalam bentuk parametrik.");
@@ -61,7 +75,7 @@ public class Spl {
 
             for (int i = n - 2; i >= 0; i--) {
                 // skip baris terakhir karena sudah pasti bernilai 0 semua
-                if (isRowZero(mat[i], m-1)) {
+                if (isRowZero(mat[i], m - 1)) {
                     continue;
                 }
                 int j = 0, oneLeading = -1;
