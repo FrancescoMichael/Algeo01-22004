@@ -513,7 +513,14 @@ public class Bikubik {
             a = mtrx[16][0];
             b = mtrx[17][0];
         }
-
+        // validasi matriks pasti 4 kali 4
+        if (matrix.length == 0) {
+            System.out.println("input tidak valid");
+            return;
+        } else if (matrix.length == 4 && matrix[0].length == 4) {
+            System.out.println("input tidak valid");
+            return;
+        }
         // sudah ada matrix X dan y
         // process start
 
