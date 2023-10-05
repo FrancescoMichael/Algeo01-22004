@@ -473,7 +473,7 @@ public class Spl {
         double[][] res = new double[n][1];
         double det = getDeterminanEksKof(matrix, n);
         for (int i = 0; i < n; i++) {
-            displayAugmentedMatrix(matrix, n, n);
+            // displayAugmentedMatrix(matrix, n, n);
             // swapColMatrix(i, n, n);
             for (int j = 0; j < n; j++) {
                 double temp;
