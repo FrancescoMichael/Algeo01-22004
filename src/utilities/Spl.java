@@ -61,6 +61,9 @@ public class Spl {
 
             for (int i = n - 2; i >= 0; i--) {
                 // skip baris terakhir karena sudah pasti bernilai 0 semua
+                if (isRowZero(mat[i], m)) {
+                    continue;
+                }
                 int j = 0, oneLeading = -1;
                 while (j < m - 1) {
                     if (mat[i][j] == 1 && oneLeading == -1) {
@@ -91,20 +94,18 @@ public class Spl {
 
                 // sol[oneLeading] = mat[i][m-1];
                 // valSol[oneLeading] = true;
-                if(mat[i][m-1] != 0){
+                if (mat[i][m - 1] != 0) {
                     strSol[oneLeading] = "(";
                     strSol[oneLeading] += String.valueOf(mat[i][m - 1]);
                     strSol[oneLeading] += ")";
-                }else{
+                } else {
                     strSol[oneLeading] = "0";
                 }
-                
 
                 // j = oneLeading + 1;
                 // while (j < m - 1)
-                j = m-2;
-                while(j >= oneLeading + 1) 
-                {
+                j = m - 2;
+                while (j >= oneLeading + 1) {
                     if (mat[i][j] != 0) {
                         if (strSol[j] == "0") {
                             mat[i][j] = 0;
@@ -136,7 +137,7 @@ public class Spl {
                 str.append(x);
                 str.append(strSol[i]);
                 str.append("\n");
-                System.out.print(x+ strSol[i] + "\n");
+                System.out.print(x + strSol[i] + "\n");
                 System.out.print(" ");
             }
         } else {
