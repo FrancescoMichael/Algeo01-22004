@@ -6,7 +6,7 @@ dalam rangka pemenuhan tugas 1 algeo
 
 ## Susunan Program
 
-foler test berisikan folder input dan output. ketika hendak menggunakan file sertakan .txt dan langsung namanya saja (untuk read dan write)
+Folder test berisikan folder input dan output. Ketika hendak menggunakan file, sertakan .txt dan langsung namanya saja (untuk read dan write)
 
 ## Cara Menjalankan
 
@@ -55,6 +55,8 @@ pada bagian ini terdapat 4 submenu
 >     > menghasilkan invers matriks, pastikan input berupa matriks persegi nXn dengan n > 0 dan jangan lupa untuk setiap input pastikan berupa float atau integer bukan character lainnya
 
 ## 4. Interpolasi Polinom
+
+> menghitung interpolasi pastikan input berbentuk matriks dan kemudian masukkan titik yang yang di taksir, jika input dalam file atasnya bentuk matriks kemudian dibawahnya ada 1 angka yang berisikan titik yang mau di taksir (sesuai spek) dan pastikan semua input dalam file ataupun cli berupa angka yang valid entak float maupun integer dan bukan merupakan charackter lainnya seperti huruf dll
 
 ## 5. Interpolasi Bicubic Spline
 
