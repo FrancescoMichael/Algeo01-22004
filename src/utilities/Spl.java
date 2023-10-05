@@ -32,7 +32,6 @@ public class Spl {
 
         double[] sol = new double[m - 1]; // menyimpan solusi
         boolean[] valSol = new boolean[m - 1]; // sudah ada solui atau belum
-        boolean[] solAngka = new boolean[m-1]; // solusi angka atau tidak
         String[] strSol = new String[m - 1]; // solusi dalam bentuk string
         String[] paramLetter = { "p", "q", "r", "s", "t", "u", "v", "w" };
 
