@@ -61,7 +61,7 @@ public class Spl {
 
             for (int i = n - 2; i >= 0; i--) {
                 // skip baris terakhir karena sudah pasti bernilai 0 semua
-                if (isRowZero(mat[i], m)) {
+                if (isRowZero(mat[i], m-1)) {
                     continue;
                 }
                 int j = 0, oneLeading = -1;
